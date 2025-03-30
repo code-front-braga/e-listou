@@ -1,1 +1,12 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@theme {
+	--color-cabaret: #d94e67;
+	--color-christalle: #3e2259;
+	--color-cadetBlue: #4ba69d;
+	--color-persimmon: #f25c05;
+	--color-moonRaker: #cbc4d3;
+
+	--font-poiretOne: 'Poiret One', sans-serif;
+	--font-lato: 'Lato', sans-serif;
+}
