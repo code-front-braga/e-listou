@@ -12,8 +12,10 @@ export function MobileHeader() {
 	return (
 		<header
 			className={clsx('fixed z-50 h-20 w-full rounded-b-3xl md:hidden', {
-				'bg-cadetBlue/65 shadow-xl backdrop-blur-sm': activeHash === '#about',
-				'bg-christalle/65 shadow-xl backdrop-blur-sm': activeHash === '#techs',
+				'bg-cadetBlue/65 shadow-xl backdrop-blur-sm':
+					activeHash === '#site-about',
+				'bg-christalle/65 shadow-xl backdrop-blur-sm':
+					activeHash === '#site-techs',
 			})}
 		>
 			<MobileHeaderContainer>

@@ -1,10 +1,10 @@
+import './globals.css';
+import { lato, poiretOne } from '@/utils/fonts';
 import { DesktopHeader } from './(site)/components/header/desktop/desktop-header';
 import { MobileHeader } from './(site)/components/header/mobile/mobile-header';
 import { SiteFooter } from './(site)/components/site-footer';
 import { MenuToggleProvider } from './(site)/contexts/menu-toggle-context';
 import { ScrollProvider } from './(site)/contexts/scroll-context';
-import './globals.css';
-import { lato, poiretOne } from './utils/fonts';
 
 export default function RootLayout({
 	children,
