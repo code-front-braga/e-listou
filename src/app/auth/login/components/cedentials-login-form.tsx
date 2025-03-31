@@ -12,6 +12,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { CredentialsLoginData, credentialsLoginSchema } from '@/lib/zod/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaSignInAlt } from 'react-icons/fa';
 import { ImSpinner } from 'react-icons/im';
@@ -22,6 +23,15 @@ export function CredentialsLoginForm() {
 		resolver: zodResolver(credentialsLoginSchema),
 		defaultValues: { email: '', password: '' },
 	});
+	const [showPassword, setShowPassword] = useState<boolean>(false);
+	const focusSet = useRef(false);
+
+	useEffect(() => {
+		if (!focusSet.current) {
+			form.setFocus('email');
+			focusSet.current = true;
+		}
+	}, [form]);
 
 	async function handleLogin() {}
 
@@ -29,20 +39,20 @@ export function CredentialsLoginForm() {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(handleLogin)}
-				className="mx-auto mt-2.5 flex w-full flex-col items-center gap-8"
+				className="flex w-full flex-col items-center gap-8"
 			>
 				<FormField
 					control={form.control}
 					name="email"
 					render={({ field }) => (
 						<FormItem className="relative w-full">
-							<FormLabel className="text-cabaret">Email</FormLabel>
+							<FormLabel className="text-christalle">Email</FormLabel>
 							<FormControl>
 								<Input
 									placeholder="Digite seu email..."
 									{...field}
 									autoComplete="email"
-									className="bg-christalle/25 text-christalle rounded p-2 indent-2 text-sm placeholder:text-white"
+									className="bg-christalle/65 rounded p-2 indent-2 text-sm text-white placeholder:text-white"
 								/>
 							</FormControl>
 							<FormMessage className="absolute -bottom-5" />
@@ -54,13 +64,13 @@ export function CredentialsLoginForm() {
 					name="password"
 					render={({ field }) => (
 						<FormItem className="relative w-full">
-							<FormLabel className="text-cabaret">Senha</FormLabel>
+							<FormLabel className="text-christalle">Senha</FormLabel>
 							<FormControl>
 								<Input
 									placeholder="Digite sua senha..."
 									{...field}
 									autoComplete="current-password"
-									className="bg-christalle/25 text-christalle rounded p-2 indent-2 text-sm placeholder:text-white"
+									className="bg-christalle/65 rounded p-2 indent-2 text-sm text-white placeholder:text-white"
 								/>
 							</FormControl>
 							{/* <button

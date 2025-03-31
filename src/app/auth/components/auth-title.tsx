@@ -12,7 +12,7 @@ export function AuthTitle() {
 						initial={{ x: 50, opacity: 0 }}
 						animate={{ x: 0, opacity: 1 }}
 						transition={{ duration: 1.4, ease: 'easeOut', delay: 1.2 }}
-						className="font-poiretOne text-christalle text-3xl font-semibold sm:text-4xl"
+						className="font-poiretOne text-christalle text-2xl font-semibold sm:text-3xl"
 					>
 						<span className="text-cabaret">e-</span>
 						<span className="text-cabaret">L</span>istou
@@ -29,16 +29,16 @@ export function AuthTitle() {
 						initial={{ x: -50 }}
 						animate={{ x: 0 }}
 						transition={{ duration: 2.2, ease: 'anticipate', delay: 0.6 }}
-						className="z-0 flex items-center justify-center rounded-full bg-white p-1.5"
+						className="bg-christalle z-0 flex items-center justify-center rounded-full p-1.5"
 					>
-						<FaOpencart size={24} className="text-christalle" />
+						<FaOpencart size={24} className="text-white" />
 					</motion.div>
 				</div>
 				<motion.p
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ duration: 1, ease: 'linear', delay: 1.6 }}
-					className="text-christalle text-lg sm:text-xl"
+					className="text-christalle text-base sm:text-xl"
 				>
 					Seu supermercado, do seu jeito.
 				</motion.p>
