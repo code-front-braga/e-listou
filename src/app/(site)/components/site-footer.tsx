@@ -40,7 +40,7 @@ export function SiteFooter() {
 		<footer className="bg-cabaret relative z-10 py-6 text-center text-white">
 			<div className="container mx-auto flex flex-col items-center gap-4">
 				<p className="text-sm leading-normal">
-					Experimente o SafeKart e simplifique sua rotina de supermercado!
+					Experimente o e-Listou! e simplifique sua rotina de supermercado!
 				</p>
 
 				<ul className="flex flex-col gap-2.5">{contactDetails}</ul>

@@ -10,3 +10,10 @@
 	--font-poiretOne: 'Poiret One', sans-serif;
 	--font-lato: 'Lato', sans-serif;
 }
+
+@layer base {
+	button:not(:disabled),
+	[role='button']:not(:disabled) {
+		cursor: pointer;
+	}
+}
