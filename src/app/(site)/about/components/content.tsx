@@ -69,7 +69,7 @@ export function Content() {
 				className="bg-christalle relative mb-4 h-50 w-full rounded-xl md:mb-0 md:block md:h-100 md:flex-3/2"
 			>
 				<Image
-					src="/bg-about.jpg"
+					src="/about-bg.jpg"
 					alt="Homem negro segurando uma fruta e um celular comparando preços"
 					fill
 					quality={100}
