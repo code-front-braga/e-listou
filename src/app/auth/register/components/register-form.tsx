@@ -3,7 +3,7 @@
 import { Form } from '@/components/ui/form';
 import { RegisterData, registerSchema } from '@/lib/zod/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { RegisterContext, RegisterSteps } from '../context/register-context';
 import { InputStepModel } from './input-step-model';
@@ -34,30 +34,35 @@ export function RegisterForm() {
 		}
 	}, [step]);
 
-	async function handleNextStep(
-		fieldName: keyof RegisterData,
-		nextStep: RegisterSteps,
-	) {
-		const isValid = await form.trigger(fieldName);
-		if (isValid) {
-			setStep(nextStep);
-		}
-	}
+	const handleNextStep = useCallback(
+		async (fieldName: keyof RegisterData, nextStep: RegisterSteps) => {
+			const isValid = await form.trigger(fieldName);
+			if (isValid) {
+				setStep(nextStep);
+			}
+		},
+		[form, setStep],
+	);
 
-	function handlePasswordConfirmation(e: React.FormEvent) {
-		e.preventDefault();
-		const isValid = form.trigger(['password', 'confirmPassword']);
-		const { password, confirmPassword } = form.getValues();
+	const handlePasswordConfirmation = useCallback(
+		(e: React.FormEvent) => {
+			e.preventDefault();
+			const isValid = form.trigger(['password', 'confirmPassword']);
+			const { password, confirmPassword } = form.getValues();
 
-		if (!isValid) return;
+			if (!isValid) return;
 
-		if (password !== confirmPassword) {
-			form.setError('confirmPassword', { message: 'As senhas não coincidem' });
-			return;
-		}
+			if (password !== confirmPassword) {
+				form.setError('confirmPassword', {
+					message: 'As senhas não coincidem',
+				});
+				return;
+			}
 
-		nextStep();
-	}
+			nextStep();
+		},
+		[form, nextStep],
+	);
 
 	return (
 		<Form {...form}>
@@ -69,10 +74,12 @@ export function RegisterForm() {
 					{step === 'name-step' && (
 						<InputStepModel
 							form={form}
-							title="Para começar, digite seu nome ou um apelido..."
-							label="Nome"
+							type="text"
 							fieldName="name"
+							label="Nome"
 							placeholder="Digite seu nome/apelido..."
+							autoComplete="name"
+							title="Para começar, digite seu nome ou um apelido..."
 							onNext={() => handleNextStep('name', 'email-step')}
 						/>
 					)}
@@ -80,10 +87,12 @@ export function RegisterForm() {
 					{step === 'email-step' && (
 						<InputStepModel
 							form={form}
-							title="Agora, digite seu melhor email..."
-							label="Email"
+							type="email"
 							fieldName="email"
+							label="Email"
 							placeholder="Digite seu email..."
+							autoComplete="email"
+							title="Agora, digite seu melhor email..."
 							onNext={() => handleNextStep('email', 'password-step')}
 						/>
 					)}
@@ -91,31 +100,32 @@ export function RegisterForm() {
 					{step === 'password-step' && (
 						<InputStepModel
 							form={form}
-							title="Crie uma senha..."
-							label="Senha"
-							fieldName="password"
-							placeholder="Digite sua senha..."
-							onNext={() => handleNextStep('password', 'confirm-password-step')}
 							type="password"
+							fieldName="password"
+							label="Senha"
+							placeholder="Digite sua senha..."
 							autoComplete="new-password"
+							title="Crie uma senha..."
 							showPassword={showPassword}
 							setShowPassword={() => setShowPassword(!showPassword)}
+							onNext={() => handleNextStep('password', 'confirm-password-step')}
 						/>
 					)}
 
 					{step === 'confirm-password-step' && (
 						<InputStepModel
 							form={form}
-							title="Por favor, confirme sua senha..."
-							label="Confirme a senha"
-							fieldName="confirmPassword"
-							placeholder="Confirme sua senha..."
-							onNext={e => handlePasswordConfirmation(e)}
 							type="password"
+							fieldName="confirmPassword"
+							label="Confirme a senha"
+							title="Por favor, confirme sua senha..."
+							placeholder="Confirme sua senha..."
+							autoComplete="new-password"
 							showPassword={showConfirmPassword}
 							setShowPassword={() =>
 								setShowConfirmPassword(!showConfirmPassword)
 							}
+							onNext={e => handlePasswordConfirmation(e)}
 						/>
 					)}
 
