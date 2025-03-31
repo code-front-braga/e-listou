@@ -77,7 +77,7 @@ export function TechsList() {
 					delay: index * 0.1,
 				}}
 				viewport={{ once: false }}
-				className="flex flex-col items-center rounded-lg bg-white/10 p-4 text-center text-white shadow-md backdrop-blur-sm transition-transform duration-300 hover:scale-102"
+				className="flex flex-col items-center rounded-lg bg-christalle/60 p-4 text-center text-white shadow-md backdrop-blur-sm transition-transform duration-300 hover:scale-102"
 			>
 				<div className="mb-2">
 					<tech.icon size={24} className={techColors[tech.name]} />

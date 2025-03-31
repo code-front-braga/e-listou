@@ -1,4 +1,8 @@
+import { DesktopHeader } from './(site)/components/header/desktop/desktop-header';
+import { MobileHeader } from './(site)/components/header/mobile/mobile-header';
 import { SiteFooter } from './(site)/components/site-footer';
+import { MenuToggleProvider } from './(site)/contexts/menu-toggle-context';
+import { ScrollProvider } from './(site)/contexts/scroll-context';
 import './globals.css';
 import { lato, poiretOne } from './utils/fonts';
 
@@ -12,8 +16,14 @@ export default function RootLayout({
 			<body
 				className={`${poiretOne.className} ${lato.className} overflow-x-hidden antialiased`}
 			>
-				{children}
-				<SiteFooter />
+				<MenuToggleProvider>
+					<ScrollProvider>
+						<MobileHeader />
+						<DesktopHeader />
+						{children}
+						<SiteFooter />
+					</ScrollProvider>
+				</MenuToggleProvider>
 			</body>
 		</html>
 	);
