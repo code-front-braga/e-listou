@@ -8,7 +8,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="pt-br">
-			<body className={`${poiretOne.className} ${lato.className} antialiased`}>
+			<body
+				className={`${poiretOne.className} ${lato.className} overflow-x-hidden antialiased`}
+			>
 				{children}
 			</body>
 		</html>

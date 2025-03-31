@@ -4,27 +4,21 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { FaOpencart } from 'react-icons/fa';
 
-const opacityVariants = {
-	visible: { opacity: 1 },
-	hidden: { opacity: 0 },
-};
-
 export function Content() {
 	return (
 		<div className="relative z-10 m-auto flex flex-col items-center gap-1">
 			<div className="relative flex items-center justify-center gap-2 overflow-hidden">
 				<motion.h1
-					initial={{ opacity: 0, x: 50 }}
-					animate={{ opacity: 1, x: 0 }}
+					initial={{ x: 50, opacity: 0 }}
+					animate={{ x: 0, opacity: 1 }}
 					transition={{ duration: 1.4, ease: 'easeOut', delay: 1.2 }}
 					className="font-poiretOne text-3xl font-semibold text-white sm:text-4xl"
 				>
 					<span className="text-cabaret">e-</span>
 					<span className="text-cabaret">L</span>istou
 					<motion.span
-						variants={opacityVariants}
-						initial="hidden"
-						whileInView="visible"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
 						transition={{ duration: 1.4, ease: 'linear', delay: 2.6 }}
 						className="text-cabaret font-lato"
 					>
@@ -41,18 +35,16 @@ export function Content() {
 				</motion.div>
 			</div>
 			<motion.p
-				variants={opacityVariants}
-				initial="hidden"
-				whileInView="visible"
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
 				transition={{ duration: 1, ease: 'linear', delay: 1.6 }}
 				className="text-lg text-white sm:text-xl"
 			>
 				Seu supermercado, do seu jeito.
 			</motion.p>
 			<motion.button
-				variants={opacityVariants}
-				initial="hidden"
-				whileInView="visible"
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
 				transition={{ duration: 1, ease: 'anticipate', delay: 1.8 }}
 				className="mt-1.5 rounded-full bg-white p-1.5 px-3 shadow-2xl sm:w-full"
 			>
