@@ -1,4 +1,5 @@
 import './globals.css';
+import { lato, poiretOne } from './utils/fonts';
 
 export default function RootLayout({
 	children,
@@ -7,7 +8,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="pt-br">
-			<body className={`antialiased`}>{children}</body>
+			<body
+				className={`${poiretOne.className} ${lato.className} min-h-svh w-full antialiased`}
+			>
+				{children}
+			</body>
 		</html>
 	);
 }
