@@ -21,7 +21,7 @@ export function Content() {
 					</motion.h2>
 
 					<motion.p
-						className="font-gantari text-justify text-sm leading-normal text-white sm:text-base"
+						className="text-justify text-sm leading-normal text-white sm:text-base"
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 1.4, ease: 'easeOut', delay: 0.2 }}
@@ -42,7 +42,7 @@ export function Content() {
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 1.4, ease: 'easeOut', delay: 0.4 }}
 						viewport={{ once: false }}
-						className="text-christalle font-gantari"
+						className="text-christalle"
 					>
 						Com uma interface simples e intuitiva, o e-Listou! permite que você:
 					</motion.p>
@@ -54,7 +54,7 @@ export function Content() {
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 1, ease: 'easeOut', delay: 0.6 }}
 						viewport={{ once: false }}
-						className="font-rajdhani text-christalle leading-normal font-semibold sm:text-lg"
+						className="text-christalle leading-normal font-semibold sm:text-lg"
 					>
 						Nosso compromisso é oferecer uma experiência prática e eficiente
 						para que você tenha mais controle sobre suas compras e gastos.

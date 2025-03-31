@@ -1,3 +1,4 @@
+import { SiteFooter } from './(site)/components/site-footer';
 import './globals.css';
 import { lato, poiretOne } from './utils/fonts';
 
@@ -12,6 +13,7 @@ export default function RootLayout({
 				className={`${poiretOne.className} ${lato.className} overflow-x-hidden antialiased`}
 			>
 				{children}
+				<SiteFooter />
 			</body>
 		</html>
 	);

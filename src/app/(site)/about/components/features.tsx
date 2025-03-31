@@ -14,7 +14,6 @@ export function Features() {
 		return (
 			<motion.li
 				key={index}
-				className="font-gantari text-christalle flex items-center rounded-sm bg-white p-1.5 text-xs transition-transform duration-300 hover:scale-102 sm:text-sm"
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				transition={{
@@ -23,6 +22,7 @@ export function Features() {
 					delay: index * 0.1,
 				}}
 				viewport={{ once: false }}
+				className="text-christalle flex items-center rounded-sm bg-white p-1.5 text-xs transition-transform duration-300 hover:scale-102 sm:text-sm"
 			>
 				{feature}
 			</motion.li>
