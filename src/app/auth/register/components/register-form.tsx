@@ -9,6 +9,9 @@ import { RegisterContext, RegisterSteps } from '../context/register-context';
 import { InputStepModel } from './input-step-model';
 import { AnimatePresence } from 'motion/react';
 import { SubmitStep } from './submit-step';
+import { createUser } from '../../actions/create-user';
+import { showPromiseToast } from '@/components/promise-toast';
+import { useRouter } from 'next/navigation';
 
 const fieldMap: Partial<Record<RegisterSteps, keyof RegisterData>> = {
 	'name-step': 'name',
@@ -27,6 +30,7 @@ export function RegisterForm() {
 	const [showConfirmPassword, setShowConfirmPassword] =
 		useState<boolean>(false);
 	const [submitLoading, setSubmitLoading] = useState<boolean>(false);
+	const router = useRouter();
 
 	useEffect(() => {
 		if (fieldMap[step]) {
@@ -64,10 +68,33 @@ export function RegisterForm() {
 		[form, nextStep],
 	);
 
+	async function handleRegisterUser(data: RegisterData) {
+		setSubmitLoading(true);
+
+		try {
+			const resPromise = createUser(data);
+			showPromiseToast({
+				loading: 'Cadastrando usuário...',
+				promise: resPromise,
+			});
+			const res = await resPromise;
+			if (res.success) {
+				router.push('/auth/login');
+			}
+			if (res.error) {
+				setStep('email-step');
+			}
+		} catch (error) {
+			console.error('Erro ao cadastrar o usuário:', error);
+		} finally {
+			setSubmitLoading(false);
+		}
+	}
+
 	return (
 		<Form {...form}>
 			<form
-				onSubmit={() => {}}
+				onSubmit={form.handleSubmit(handleRegisterUser)}
 				className="relative mx-auto mt-2.5 flex w-full flex-col items-center gap-3.5 overflow-hidden"
 			>
 				<AnimatePresence mode="wait">
@@ -77,6 +104,7 @@ export function RegisterForm() {
 							type="text"
 							fieldName="name"
 							label="Nome"
+							ariaLabel="Username"
 							placeholder="Digite seu nome/apelido..."
 							autoComplete="name"
 							title="Para começar, digite seu nome ou um apelido..."

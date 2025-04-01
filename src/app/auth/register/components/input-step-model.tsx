@@ -20,6 +20,7 @@ import { BackButton } from './back-button';
 interface StepProps {
 	title: string;
 	label: string;
+	ariaLabel?: string;
 	fieldName: keyof RegisterData;
 	placeholder: string;
 	onNext: (e: React.FormEvent) => void;
@@ -33,6 +34,7 @@ interface StepProps {
 export function InputStepModel({
 	title,
 	label,
+	ariaLabel,
 	fieldName,
 	placeholder,
 	onNext,
@@ -66,6 +68,7 @@ export function InputStepModel({
 							<Input
 								type={showPassword ? 'text' : type}
 								placeholder={placeholder}
+								aria-label={ariaLabel}
 								{...field}
 								autoComplete={autoComplete}
 								className="bg-christalle/65 rounded p-2 indent-2 text-sm text-white placeholder:text-white"
