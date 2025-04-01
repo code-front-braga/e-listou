@@ -8,14 +8,16 @@ generator client {
 }
 
 model User {
-  id            String          @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String          @unique
+  email         String    @unique
   emailVerified DateTime?
+  password      String?
   image         String?
+  isFirstLogin  Boolean?
+
   accounts      Account[]
   sessions      Session[]
-  // Optional for WebAuthn support
   Authenticator Authenticator[]
 
   createdAt DateTime @default(now())

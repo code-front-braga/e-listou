@@ -23,6 +23,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.1.2
         version: 1.1.2(@types/react@19.0.12)(react@19.1.0)
+      bcrypt-ts:
+        specifier: ^6.0.0
+        version: 6.0.0
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -938,6 +941,10 @@ packages:
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+
+  bcrypt-ts@6.0.0:
+    resolution: {integrity: sha512-P6B36krzeMDEIzG2o2SiDxHCSHeWF2Fvj/Kvmr5gAMBs6jpKfU/9LPXkrd4Ztp3reeq9nNZEU3DQq/e0xZ1T9w==}
+    engines: {node: '>=18'}
 
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -2921,6 +2928,8 @@ snapshots:
   axobject-query@4.1.0: {}
 
   balanced-match@1.0.2: {}
+
+  bcrypt-ts@6.0.0: {}
 
   brace-expansion@1.1.11:
     dependencies:
