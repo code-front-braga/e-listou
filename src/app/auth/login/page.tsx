@@ -5,16 +5,16 @@ import { FormTitle } from '../components/form-title';
 import { CredentialsLoginForm } from './components/cedentials-login-form';
 import { GoogleLoginForm } from './components/google-login-form';
 
-export default function LoginPage() {
+export default async function LoginPage() {
 	return (
 		<AuthSection>
 			<AuthContainer>
 				<FormTitle title="Seja Bem-vindo!" />
-        <CredentialsLoginForm />
-        <GoogleLoginForm />
+				<CredentialsLoginForm />
+				<GoogleLoginForm />
 			</AuthContainer>
 
-      <AuthFooter
+			<AuthFooter
 				href="/auth/register"
 				paragraphText="Não possui uma conta?"
 				linkText="Cadastre-se"

@@ -4,10 +4,10 @@ import Form from 'next/form';
 import { useActionState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { Button } from '@/components/ui/button';
-import { googleLogin } from '../services/google-login';
+import { googleAuthenticate } from '../services/google-login';
 
 export function GoogleLoginForm() {
-	const [status, formAction] = useActionState(googleLogin, undefined);
+	const [status, formAction] = useActionState(googleAuthenticate, undefined);
 
 	return (
 		<Form action={formAction} className="w-full">
@@ -18,7 +18,9 @@ export function GoogleLoginForm() {
 				<span>Ou faça o login pelo Google</span>
 				<FcGoogle size={24} />
 			</Button>
-			{status?.success === false && <p>{status?.message}</p>}
+			{status?.success === false && (
+				<p className="text-cabaret mt-2 font-semibold">{status?.message}</p>
+			)}
 		</Form>
 	);
 }

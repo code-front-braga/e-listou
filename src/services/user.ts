@@ -16,3 +16,16 @@ export async function getUserById(id: string) {
 		throw new Error('Ocorreu um erro ao buscar o usuário.');
 	}
 }
+
+export async function getAccountByUser(userId: string) {
+	try {
+		const existingAccount = await db.account.findFirst({
+			where: { userId },
+		});
+
+		return existingAccount || null;
+	} catch (error) {
+		console.error('Erro ao buscar a conta:', error);
+		throw new Error('Ocorreu um erro ao buscar a conta.');
+	}
+}

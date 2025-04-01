@@ -1,22 +1,18 @@
-import { AuthError } from 'next-auth';
+'use server';
+
 import { signIn } from '../../../../../auth';
+import { AuthError } from 'next-auth';
 
-export async function googleLogin() {
+export async function googleAuthenticate() {
 	try {
-		await signIn('google', {
-			redirectTo: '/dashboard',
-		});
-
-		return { success: true, message: 'Usuário logado com o Google!' };
+		await signIn('google');
 	} catch (error) {
-		console.error('Erro ao tentar logar com o Google:', error);
-
 		if (error instanceof AuthError) {
 			return {
 				success: false,
-				message: 'Erro de autenticação: ' + error.message,
+				message: 'Autenticação com o Google falhou',
 			};
 		}
-		return { success: false, message: 'Erro ao tentar logar com o Google' };
+		throw error;
 	}
 }
