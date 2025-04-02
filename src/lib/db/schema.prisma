@@ -16,12 +16,46 @@ model User {
   image         String?
   isFirstLogin  Boolean?
 
+  cart          Cart[]
   accounts      Account[]
   sessions      Session[]
   Authenticator Authenticator[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id          String     @id @default(cuid())
+  supermarket String
+  status      CartStatus
+  total       Float
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items       Item[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  completedAt DateTime?
+}
+
+model Item {
+  id         String @id @default(cuid())
+  name       String
+  price      Float
+  quantity   Int
+  totalPrice Float
+
+  cartId String?
+  cart   Cart?   @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum CartStatus {
+  PENDING
+  COMPLETED
 }
 
 model Account {
