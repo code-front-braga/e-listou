@@ -20,7 +20,7 @@ import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import { login } from '../../actions/login';
 import { showPromiseToast } from '@/components/promise-toast';
 import { useRouter } from 'next/navigation';
-import { getUserByEmail } from '@/services/user';
+import { getUserByEmail } from '@/app/auth/actions/get-user-by-email';
 
 export function CredentialsLoginForm() {
 	const form = useForm<CredentialsLoginData>({

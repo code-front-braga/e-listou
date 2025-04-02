@@ -50,5 +50,5 @@ export const {
 			};
 		},
 	},
-	pages: { signIn: '/auth/login' },
+	pages: { signIn: '/auth/login', newUser: '/welcome' },
 });
