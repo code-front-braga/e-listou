@@ -104,7 +104,7 @@ export function RegisterForm() {
 							type="text"
 							fieldName="name"
 							label="Nome"
-							ariaLabel="Username"
+							ariaLabel="Nome de usuário"
 							placeholder="Digite seu nome/apelido..."
 							autoComplete="name"
 							title="Para começar, digite seu nome ou um apelido..."
