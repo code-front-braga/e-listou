@@ -81,7 +81,7 @@ export function InputStepModel({
 						</FormControl>
 						{(step === 'password-step' || step === 'confirm-password-step') && (
 							<button
-								className="text-christalle absolute top-7.5 right-3.5"
+								className="absolute top-7.5 right-3.5 text-white"
 								type="button"
 								onClick={() => setShowPassword && setShowPassword(true)}
 							>

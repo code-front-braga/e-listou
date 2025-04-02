@@ -9,9 +9,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="pt-br">
-			<body
-				className={`${poiretOne.className} ${lato.className} min-h-svh antialiased`}
-			>
+			<body className={`${poiretOne.className} ${lato.className} antialiased`}>
 				{children}
 				<Toaster richColors />
 			</body>

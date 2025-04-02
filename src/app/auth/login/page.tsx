@@ -5,7 +5,7 @@ import { FormTitle } from '../components/form-title';
 import { CredentialsLoginForm } from './components/cedentials-login-form';
 import { GoogleLoginForm } from './components/google-login-form';
 
-export default async function LoginPage() {
+export default function LoginPage() {
 	return (
 		<AuthSection>
 			<AuthContainer>

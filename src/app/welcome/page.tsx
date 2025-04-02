@@ -8,11 +8,13 @@ export default async function WelcomePage() {
 	if (!session) redirect('/auth/login');
 
 	return (
-		<WelcomeAnimation
-			user={{
-				name: session.user?.name as string,
-				email: session.user?.email as string,
-			}}
-		/>
+		<section className="min-h-svh w-full">
+			<WelcomeAnimation
+				user={{
+					name: session.user?.name as string,
+					email: session.user?.email as string,
+				}}
+			/>
+		</section>
 	);
 }

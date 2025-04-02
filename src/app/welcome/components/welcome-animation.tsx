@@ -52,7 +52,7 @@ export function WelcomeAnimation({ user }: AnimateScreenProps) {
 				background: 'linear-gradient(90deg, #6a11cb, #2575fc)',
 				backgroundSize: '200% 200%',
 			}}
-			className="flex h-full items-center justify-center"
+			className="flex h-screen items-center justify-center"
 		>
 			<motion.article
 				initial={{ opacity: 0, y: 20 }}

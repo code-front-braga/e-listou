@@ -111,7 +111,7 @@ export function CredentialsLoginForm() {
 							<button
 								type="button"
 								onClick={togglePasswordVisibility}
-								className="text-christalle absolute top-7.5 right-3.5"
+								className="text-white absolute top-7.5 right-3.5"
 							>
 								{showPassword ? (
 									<IoIosEye size={18} />
