@@ -1,10 +1,13 @@
 import { DashboardSection } from '../components/dashboard-section';
-import { InitStep } from './components/init-step';
+import { AllSteps } from './components/all-steps';
+import { CartProvider } from './contexts/cart';
 
 export default function DashboardCartPage() {
 	return (
 		<DashboardSection>
-			<InitStep />
+			<CartProvider>
+				<AllSteps />
+			</CartProvider>
 		</DashboardSection>
 	);
 }

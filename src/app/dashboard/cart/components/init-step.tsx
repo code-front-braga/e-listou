@@ -1,15 +1,21 @@
-import Link from 'next/link';
+'use client';
+
+import { useContext, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
+import { CartContext } from '../contexts/cart';
+import { StepTransition } from './step-transition';
 
 export function InitStep() {
+	const { nextStep } = useContext(CartContext);
+
 	return (
-		<div className="flex h-full">
-			<Link href="" className="flex items-center gap-2 self-end">
+		<StepTransition className="flex h-full">
+			<button onClick={nextStep} className="flex items-center gap-2 self-end">
 				<FaPlus size={20} color="#f25c05" />
 				<span className="text-christalle font-semibold">
 					Nova Lista de Compras
 				</span>
-			</Link>
-		</div>
+			</button>
+		</StepTransition>
 	);
 }
