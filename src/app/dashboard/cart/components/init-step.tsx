@@ -1,9 +1,9 @@
 'use client';
 
-import { useContext, useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { useContext } from 'react';
 import { CartContext } from '../contexts/cart';
 import { StepTransition } from './step-transition';
+import { FaPlus } from 'react-icons/fa';
 
 export function InitStep() {
 	const { nextStep } = useContext(CartContext);

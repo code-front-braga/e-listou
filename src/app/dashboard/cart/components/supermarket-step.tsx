@@ -10,27 +10,52 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { AnimatePresence, motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { useContext, useState } from 'react';
 import { MdKeyboardDoubleArrowLeft } from 'react-icons/md';
 import { CartContext } from '../contexts/cart';
 import { useForm } from 'react-hook-form';
-import { SupermarketData, supermarketSchema } from '@/lib/zod/cart';
+import { SupermarketNameData, supermarketNameSchema } from '@/lib/zod/cart';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { StepTransition } from './step-transition';
+import { createCart } from '../../actions/create-cart';
+import { showPromiseToast } from '@/components/promise-toast';
 
 export function SupermarketStep() {
-	const form = useForm<SupermarketData>({
-		resolver: zodResolver(supermarketSchema),
+	const form = useForm<SupermarketNameData>({
+		resolver: zodResolver(supermarketNameSchema),
 		defaultValues: { supermarketName: '' },
 	});
 	const { nextStep, backStep } = useContext(CartContext);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [shouldExit, setShouldExit] = useState<boolean>(false);
 
-	const handleBack = () => {
-		setShouldExit(true);
-	};
+	const handleBackStep = () => setShouldExit(true);
+
+	async function handleCreateCart(data: SupermarketNameData) {
+		setLoading(true);
+
+		const resPromise = createCart({ ...data });
+		showPromiseToast({
+			loading: 'Criando carrinho...',
+			promise: resPromise,
+		});
+
+		try {
+			const res = await resPromise;
+			if (res.success) {
+				nextStep();
+				form.reset();
+			}
+			if (res.error) {
+				console.error('Erro ao tentar criar o carrinho:', res.error);
+			}
+		} catch (error) {
+			console.error('Erro ao tentar salvar o carrinho:', error);
+		} finally {
+			setLoading(false);
+		}
+	}
 
 	return (
 		<>
@@ -39,7 +64,10 @@ export function SupermarketStep() {
 				shouldExit={shouldExit}
 				className="flex h-full flex-col"
 			>
-				<button onClick={handleBack} className="mb-4 flex items-center gap-1.5">
+				<button
+					onClick={handleBackStep}
+					className="mb-4 flex items-center gap-1.5"
+				>
 					<motion.div
 						animate={{ x: -4 }}
 						transition={{
@@ -60,7 +88,10 @@ export function SupermarketStep() {
 				</p>
 
 				<Form {...form}>
-					<form className="flex h-full flex-col justify-between">
+					<form
+						onSubmit={form.handleSubmit(handleCreateCart)}
+						className="flex h-full flex-col justify-between"
+					>
 						<FormField
 							control={form.control}
 							name="supermarketName"

@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
-const supermarketSchema = z.object({
+const supermarketNameSchema = z.object({
 	supermarketName: z
 		.string()
 		.min(2, { message: 'Campo obrigatório. Digite um nome de supermercado.' })
 		.trim(),
 });
 
-type SupermarketData = z.infer<typeof supermarketSchema>;
+type SupermarketNameData = z.infer<typeof supermarketNameSchema>;
 
-export { supermarketSchema, type SupermarketData };
+export { supermarketNameSchema, type SupermarketNameData };
