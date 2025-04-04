@@ -9,6 +9,8 @@ import { showPromiseToast } from '@/components/promise-toast';
 import { ImSpinner } from 'react-icons/im';
 import { TbShoppingCartCancel, TbShoppingCartCopy } from 'react-icons/tb';
 import { deleteCart } from '../../actions/delete-cart';
+import { BeatLoader } from 'react-spinners';
+import { AddItemForm } from './add-item-form';
 
 export function ItemsList() {
 	const { items, completeCartContext, setStep } = useContext(CartContext);
@@ -89,7 +91,7 @@ export function ItemsList() {
 						{completeCartLoading ? (
 							<>
 								Finalizando...
-								<ImSpinner size={24} className="animate-spin" />
+								<BeatLoader size={10} color="#fff" />
 							</>
 						) : (
 							<>
@@ -107,7 +109,7 @@ export function ItemsList() {
 						{cancelCartLoading ? (
 							<>
 								Cancelando...
-								<ImSpinner size={24} className="animate-spin" />
+								<BeatLoader size={10} color="#fff" />
 							</>
 						) : (
 							<>
@@ -147,6 +149,8 @@ export function ItemsList() {
 					</div>
 				</div>
 			)}
+
+			<AddItemForm />
 
 			{isCancelDialogOpen && (
 				<ConfirmDialog

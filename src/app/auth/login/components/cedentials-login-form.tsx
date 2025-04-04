@@ -16,6 +16,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaSignInAlt } from 'react-icons/fa';
 import { ImSpinner } from 'react-icons/im';
+import { BeatLoader } from 'react-spinners';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import { login } from '../../actions/login';
 import { showPromiseToast } from '@/components/promise-toast';
@@ -111,7 +112,7 @@ export function CredentialsLoginForm() {
 							<button
 								type="button"
 								onClick={togglePasswordVisibility}
-								className="text-white absolute top-7.5 right-3.5"
+								className="absolute top-7.5 right-3.5 text-white"
 							>
 								{showPassword ? (
 									<IoIosEye size={18} />
@@ -131,7 +132,7 @@ export function CredentialsLoginForm() {
 					{loginLoading ? (
 						<>
 							<span>Entrando...</span>
-							<ImSpinner size={24} className="animate-spin" />
+							<BeatLoader size={10} color="#fff" />
 						</>
 					) : (
 						<>

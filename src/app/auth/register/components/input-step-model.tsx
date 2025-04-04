@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm, UseFormReturn } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import { RegisterData } from '@/lib/zod/auth';
 import { useContext } from 'react';
 import { RegisterContext } from '../context/register-context';

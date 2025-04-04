@@ -1,12 +1,12 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
-import { RegisterData } from '@/lib/zod/auth';
 import { motion } from 'motion/react';
 import { useContext } from 'react';
-import { useForm } from 'react-hook-form';
 import { FaUserPlus } from 'react-icons/fa';
-import { ImSpinner } from 'react-icons/im';
 import { MdKeyboardDoubleArrowLeft } from 'react-icons/md';
 import { RegisterContext } from '../context/register-context';
+import { BeatLoader } from 'react-spinners';
 
 interface SubmitStepProps {
 	loading: boolean;
@@ -53,17 +53,7 @@ export function SubmitStep({ loading }: SubmitStepProps) {
 				{loading ? (
 					<>
 						<span>Criando Sua Conta...</span>
-						<motion.div
-							initial={{ scale: 1 }}
-							animate={{ scale: 1.3 }}
-							transition={{
-								duration: 0.6,
-								repeat: Infinity,
-								repeatType: 'reverse',
-							}}
-						>
-							<ImSpinner size={24} className="animate-spin" />
-						</motion.div>
+						<BeatLoader size={10} color="#fff" />
 					</>
 				) : (
 					<>
@@ -82,12 +72,6 @@ export function SubmitStep({ loading }: SubmitStepProps) {
 					</>
 				)}
 			</Button>
-			{/* <button
-				onClick={handleCancelRegistration}
-				className="bg-moonRaker text-christalle rounded p-1.5"
-			>
-				Cancelar Cadastro
-			</button> */}
 		</motion.div>
 	);
 }

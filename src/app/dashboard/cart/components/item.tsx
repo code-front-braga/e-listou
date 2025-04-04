@@ -18,7 +18,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { deleteItem } from '../../actions/delete-item';
 import { ConfirmDialog } from '@/components/confirm-dialog';
 import { AnimatePresence, motion } from 'motion/react';
-import { set } from 'zod';
 
 interface ItemsProps {
 	item: Item;

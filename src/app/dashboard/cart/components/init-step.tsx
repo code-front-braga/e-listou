@@ -5,7 +5,7 @@ import { CartContext } from '../contexts/cart';
 import { StepTransition } from './step-transition';
 import { FaPlus } from 'react-icons/fa';
 import { PendingCartMessage } from './pending-cart-message';
-import { TailSpin } from 'react-loader-spinner';
+import { MoonLoader } from 'react-spinners';
 
 export function InitStep() {
 	const { nextStep, setStep, pendingCart, pendingLoading, setSupermarketName } =
@@ -14,7 +14,7 @@ export function InitStep() {
 	if (pendingLoading) {
 		return (
 			<div className="flex h-full flex-col items-center justify-center gap-4">
-				<TailSpin visible height="40" width="40" color="#d94e67" />
+				<MoonLoader size={28} color="#d94e67" />
 				<p>Verificando se possui carrinho pendente...</p>
 			</div>
 		);
