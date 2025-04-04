@@ -13,8 +13,9 @@ export function InitStep() {
 
 	if (pendingLoading) {
 		return (
-			<div className="flex h-full items-center justify-center gap-4">
-				<ImSpinner size={32} className="text-christalle animate-spin" />
+			<div className="flex h-full flex-col items-center justify-center gap-4">
+				<ImSpinner size={32} className="text-cabaret animate-spin" />
+				<p>Verificando se possui carrinho pendente...</p>
 			</div>
 		);
 	}
