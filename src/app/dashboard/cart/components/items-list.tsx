@@ -119,27 +119,27 @@ export function ItemsList() {
 				</div>
 			) : (
 				<div className="flex h-full flex-col justify-between">
-					<p className="text-christalle mt-4 font-semibold">
+					<p className="text-christalle mt-4 text-sm font-semibold">
 						Sua lista está vazia. Adicione o seu primeiro item!
 					</p>
 					<div className="flex flex-col gap-3">
-						<p className="text-christalle font-semibold">
+						<p className="text-christalle text-sm font-semibold">
 							Desistiu de Comprar? É só cancelar!
 						</p>
 						<button
 							type="button"
 							onClick={handleCancelCart}
 							disabled={cancelCartLoading}
-							className="text-cabaret flex items-center gap-2 font-semibold"
+							className="text-cabaret flex items-center gap-2 text-sm font-semibold"
 						>
 							{cancelCartLoading ? (
 								<>
-									<ImSpinner size={24} className="animate-spin" />
+									<ImSpinner size={22} className="animate-spin" />
 									Cancelando...
 								</>
 							) : (
 								<>
-									<TbShoppingCartCancel size={24} />
+									<TbShoppingCartCancel size={22} />
 									Cancelar Compra
 								</>
 							)}

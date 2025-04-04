@@ -61,6 +61,19 @@ export function AddItemForm() {
 		closeAddItemForm();
 	}
 
+	function formatUnitPrice(value: string, onChange: (value: number) => void) {
+		const rawValue = value.replace(/\D/g, '');
+
+		if (!rawValue) {
+			onChange(0);
+			return '';
+		}
+
+		const numericValue = Number(rawValue) / 100;
+		onChange(numericValue);
+		return formatToCurrencyBRL(numericValue);
+	}
+
 	return (
 		<AnimatePresence>
 			{addItemFormOpen && (
