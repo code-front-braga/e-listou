@@ -7,16 +7,13 @@ import { createContext, useState } from 'react';
 
 interface IHistoryContext {
 	allCompletedCarts: Cart[];
-	setAllCompletedCarts: (allCompletedCarts: Cart[]) => void;
+	setAllCompletedCarts: (carts: Cart[]) => void;
 
 	isSearchButtonClicked: boolean;
 	setIsSearchButtonClicked: (value: boolean) => void;
 
-	searchPurchaseContext: (
-		supermarketName: string,
-		allcompletedCarts: Cart[],
-	) => void;
-	clearSearchPurchaseContext: (allcompletedCarts: Cart[]) => void;
+	searchPurchaseContext: (supermarketName: string, allCarts: Cart[]) => void;
+	clearSearchPurchaseContext: (allCarts: Cart[]) => void;
 }
 
 export const HistoryContext = createContext<IHistoryContext>({
@@ -32,20 +29,18 @@ export const HistoryContext = createContext<IHistoryContext>({
 
 export function HistoryProvider({ children }: { children: React.ReactNode }) {
 	const [allCompletedCarts, setAllCompletedCarts] = useState<Cart[]>([]);
-	const [isSearchButtonClicked, setIsSearchButtonClicked] = useState(false);
+	const [isSearchButtonClicked, setIsSearchButtonClicked] =
+		useState<boolean>(false);
 
-	const searchPurchaseContext = (
-		supermarketName: string,
-		completedCarts: Cart[],
-	) => {
+	const searchPurchaseContext = (supermarketName: string, allCarts: Cart[]) => {
 		setIsSearchButtonClicked(true);
 
-		const filteredPurchase = completedCarts.filter(completedCart => {
+		const filteredPurchase = allCarts.filter(cart => {
 			const supermarketNameMatch = firstLetterToUpperCase(
-				completedCart.supermarket,
+				cart.supermarket,
 			).includes(firstLetterToUpperCase(supermarketName));
 
-			const dateMatch = formatToDateBRL(completedCart.completedAt).includes(
+			const dateMatch = formatToDateBRL(cart.completedAt).includes(
 				supermarketName,
 			);
 
@@ -56,8 +51,8 @@ export function HistoryProvider({ children }: { children: React.ReactNode }) {
 		setIsSearchButtonClicked(false);
 	};
 
-	function clearSearchPurchaseContext(allCompletedCarts: Cart[]) {
-		setAllCompletedCarts(allCompletedCarts);
+	function clearSearchPurchaseContext(allCarts: Cart[]) {
+		setAllCompletedCarts(allCarts);
 		setIsSearchButtonClicked(true);
 	}
 

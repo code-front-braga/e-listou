@@ -19,12 +19,10 @@ import { HistoryContext } from '../contexts/history';
 import { toast } from 'sonner';
 
 interface SearchCompletedCartProps {
-	completedCarts: Cart[];
+	carts: Cart[];
 }
 
-export function SearchCompletedCart({
-	completedCarts,
-}: SearchCompletedCartProps) {
+export function SearchCompletedCart({ carts }: SearchCompletedCartProps) {
 	const form = useForm<SupermarketNameData>({
 		resolver: zodResolver(supermarketNameSchema),
 		defaultValues: { supermarketName: '' },
@@ -43,13 +41,6 @@ export function SearchCompletedCart({
 	});
 
 	useEffect(() => {
-		if (supermarketName === '') {
-			clearSearchPurchaseContext(completedCarts);
-			setIsClearedButtonClicked(false);
-		}
-	}, [supermarketName]);
-
-	useEffect(() => {
 		if (filteredCarts.length === 0 && isClearedButtonClicked) {
 			toast.error('Ops!', {
 				description:
@@ -62,12 +53,20 @@ export function SearchCompletedCart({
 		}
 	}, [filteredCarts, setIsClearedButtonClicked]);
 
+	useEffect(() => {
+		if (supermarketName === '') {
+			clearSearchPurchaseContext(carts);
+			setIsClearedButtonClicked(false);
+		}
+	}, [supermarketName]);
+
 	function handleSearchCart(data: SupermarketNameData) {
-		searchPurchaseContext(data.supermarketName, completedCarts);
+		console.log('search clicado');
+		searchPurchaseContext(data.supermarketName, carts);
 		setIsClearedButtonClicked(true);
 
 		if (filteredCarts.length > 0 && !isSearchButtonClicked) {
-			clearSearchPurchaseContext(completedCarts);
+			clearSearchPurchaseContext(carts);
 			setIsClearedButtonClicked(false);
 
 			form.reset();
