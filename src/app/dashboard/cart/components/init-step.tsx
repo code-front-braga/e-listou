@@ -4,18 +4,46 @@ import { useContext } from 'react';
 import { CartContext } from '../contexts/cart';
 import { StepTransition } from './step-transition';
 import { FaPlus } from 'react-icons/fa';
+import { ImSpinner } from 'react-icons/im';
+import { PendingCartMessage } from './pending-cart-message';
 
 export function InitStep() {
-	const { nextStep } = useContext(CartContext);
+	const { nextStep, setStep, pendingCart, pendingLoading, setSupermarketName } =
+		useContext(CartContext);
+
+	if (pendingLoading) {
+		return (
+			<div className="flex h-full items-center justify-center gap-4">
+				<ImSpinner size={32} className="text-christalle animate-spin" />
+			</div>
+		);
+	}
+
+	const handleContinueWithPendingCart = () => {
+		if (pendingCart) {
+			setSupermarketName(pendingCart.supermarketName);
+
+			setStep('add-items-step');
+		}
+	};
 
 	return (
-		<StepTransition className="flex h-full">
-			<button onClick={nextStep} className="flex items-center gap-2 self-end">
-				<FaPlus size={20} color="#f25c05" />
-				<span className="text-christalle font-semibold">
-					Nova Lista de Compras
-				</span>
-			</button>
-		</StepTransition>
+		<div className="flex h-full">
+			{pendingCart ? (
+				<PendingCartMessage onClick={handleContinueWithPendingCart} />
+			) : (
+				<StepTransition className="flex h-full">
+					<button
+						onClick={nextStep}
+						className="flex items-center gap-2 self-end"
+					>
+						<FaPlus size={20} color="#f25c05" />
+						<span className="text-christalle font-semibold">
+							Nova Lista de Compras
+						</span>
+					</button>
+				</StepTransition>
+			)}
+		</div>
 	);
 }

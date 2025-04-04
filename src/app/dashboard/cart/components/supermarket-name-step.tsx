@@ -21,12 +21,12 @@ import { StepTransition } from './step-transition';
 import { createCart } from '../../actions/create-cart';
 import { showPromiseToast } from '@/components/promise-toast';
 
-export function SupermarketStep() {
+export function SupermarketNameStep() {
 	const form = useForm<SupermarketNameData>({
 		resolver: zodResolver(supermarketNameSchema),
 		defaultValues: { supermarketName: '' },
 	});
-	const { nextStep, backStep } = useContext(CartContext);
+	const { nextStep, backStep, handleSupermarketName } = useContext(CartContext);
 	const [loading, setLoading] = useState<boolean>(false);
 	const [shouldExit, setShouldExit] = useState<boolean>(false);
 
@@ -44,6 +44,7 @@ export function SupermarketStep() {
 		try {
 			const res = await resPromise;
 			if (res.success) {
+				handleSupermarketName(data);
 				nextStep();
 				form.reset();
 			}

@@ -1,9 +1,6 @@
 'use server';
 
 import { db } from '@/lib/db/prisma';
-import { firstLetterToUpperCase } from '@/utils/first-letter-to-upper-case';
-import { formatToCurrencyBRL } from '@/utils/format-to-currency-brl';
-import { formatToDateBRL } from '@/utils/format-to-date-brl';
 import { CartStatus } from '@prisma/client';
 
 export async function getOverviewData(userId: string) {
@@ -17,18 +14,14 @@ export async function getOverviewData(userId: string) {
 			where: { userId, status: CartStatus.COMPLETED },
 			orderBy: { total: 'desc' },
 		});
-		const maxPurchaseTotalFormatted = formatToCurrencyBRL(
-			maxPurchaseTotal?.total ?? 0,
-		);
 
 		const aggregatedData = await db.cart.aggregate({
 			where: { userId, status: CartStatus.COMPLETED },
 			_sum: { total: true },
 			_count: { _all: true },
 		});
-		const totalSpentValue = formatToCurrencyBRL(aggregatedData._sum.total || 0);
-		const totalSpentFormatted = formatToCurrencyBRL(totalSpentValue);
-		const totalPurchases = aggregatedData._count._all;
+		const totalSpent = aggregatedData._sum.total || 0;
+		const totalPurchases = aggregatedData._count._all || 0;
 
 		const frequentItemData = await db.item.groupBy({
 			where: { cart: { userId, status: CartStatus.COMPLETED } },
@@ -53,20 +46,15 @@ export async function getOverviewData(userId: string) {
 			take: 1,
 		});
 
-		const favouriteSupermarket =
-			favouriteSupermarketData[0]?.supermarket || null;
-
-		const formattedSupermarket = firstLetterToUpperCase(
-			favouriteSupermarket ?? '',
-		);
+		const favouriteSupermarket = favouriteSupermarketData[0]?.supermarket;
 
 		return {
 			lastPurchaseDate,
-			maxPurchaseTotal: maxPurchaseTotalFormatted,
-			totalSpent: totalSpentFormatted,
+			maxPurchaseTotal: maxPurchaseTotal?.total,
+			totalSpent,
 			totalPurchases,
 			frequentItem,
-			favouriteSupermarket: formattedSupermarket,
+			favouriteSupermarket,
 		};
 	} catch (error) {
 		console.error('Erro ao buscar dados do banco:', error);

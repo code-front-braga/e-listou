@@ -3,7 +3,8 @@
 import { useContext } from 'react';
 import { CartContext } from '../contexts/cart';
 import { InitStep } from './init-step';
-import { SupermarketStep } from './supermarket-step';
+import { SupermarketNameStep } from './supermarket-name-step';
+import { AddItemsStep } from './add-items-step';
 
 export function AllSteps() {
 	const { step } = useContext(CartContext);
@@ -11,7 +12,8 @@ export function AllSteps() {
 	return (
 		<>
 			{step === 'init-step' && <InitStep />}
-			{step === 'supermarket-step' && <SupermarketStep />}
+			{step === 'supermarket-step' && <SupermarketNameStep />}
+			{step === 'add-items-step' && <AddItemsStep />}
 		</>
 	);
 }

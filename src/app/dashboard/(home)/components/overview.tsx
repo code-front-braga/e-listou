@@ -5,6 +5,7 @@ import { OverviewItem } from './overview-item';
 import Link from 'next/link';
 import { FullTime } from './full-time';
 import { WelcomeScreen } from './welcome-screen';
+import { formatToCurrencyBRL } from '@/utils/format-to-currency-brl';
 
 interface OverviewProps {
 	user: Pick<User, 'name' | 'id'>;
@@ -12,8 +13,8 @@ interface OverviewProps {
 
 interface OverviewItem {
 	title: string;
-	description: string;
-	cartData?: Cart | null;
+	description: string | number;
+	cartData?: Cart;
 }
 
 export async function Overview({ user }: OverviewProps) {
@@ -29,13 +30,27 @@ export async function Overview({ user }: OverviewProps) {
 	const overviewItens: OverviewItem[] = [
 		{
 			title: 'Última Compra Realizada',
-			description: overviewData.lastPurchaseDate
-				? `${formatToDateBRL(overviewData.lastPurchaseDate?.completedAt)}, no ${overviewData.lastPurchaseDate?.supermarket}`
-				: '',
+			description: `${formatToDateBRL(overviewData.lastPurchaseDate?.completedAt ?? null)}, no ${overviewData.lastPurchaseDate?.supermarket}`,
 		},
 		{
 			title: 'Compra de Maior Valor',
-			description: overviewData.maxPurchaseTotal,
+			description: formatToCurrencyBRL(overviewData.maxPurchaseTotal ?? 0),
+		},
+		{
+			title: 'Total de Compras',
+			description: `${overviewData.totalPurchases} compra${overviewData.totalPurchases > 1 ? 's' : ''}`,
+		},
+		{
+			title: 'Valor Total Gasto',
+			description: formatToCurrencyBRL(overviewData.totalSpent),
+		},
+		{
+			title: 'Supermercado Favorito',
+			description: overviewData.favouriteSupermarket,
+		},
+		{
+			title: 'Produto Mais Comprado',
+			description: overviewData.frequentItem?.name ?? '',
 		},
 	];
 
@@ -44,14 +59,14 @@ export async function Overview({ user }: OverviewProps) {
 			<OverviewItem
 				key={index}
 				title={overviewItem.title}
-				description={overviewItem.description}
+				description={overviewItem.description as string}
 			>
 				{index < 2 &&
 					overviewData.lastPurchaseDate &&
 					overviewData.lastPurchaseDate?.total > 0 && (
 						<Link
 							href={`/dashboard/history/${overviewData.lastPurchaseDate.id}`}
-							className="text-cabaret font-semibold"
+							className="text-cabaret text-sm font-semibold"
 						>
 							Ver Detalhes
 						</Link>

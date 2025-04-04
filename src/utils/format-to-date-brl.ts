@@ -3,5 +3,5 @@ export function formatToDateBRL(value: Date | null): string {
 		return '';
 	}
 
-	return value.toLocaleDateString('pt-br', { dateStyle: 'medium' });
+	return value.toLocaleDateString('pt-br', { dateStyle: 'short' });
 }

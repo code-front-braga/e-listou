@@ -10,13 +10,13 @@ interface TimeProps {
 
 export function FullTime() {
 	const [time, setTime] = useState({
-		hour: new Date().getHours(),
-		minute: new Date().getMinutes(),
-		second: new Date().getSeconds(),
+		hour: 0,
+		minute: 0,
+		second: 0,
 	});
 
 	const now = new Date().toLocaleDateString('pt-BR', {
-		dateStyle: 'long',
+		dateStyle: 'full',
 	});
 
 	useEffect(() => {
@@ -35,7 +35,7 @@ export function FullTime() {
 	}
 
 	return (
-		<div className="text-christalle flex flex-col items-end text-sm font-semibold">
+		<div className="text-christalle flex flex-col items-end text-xs font-semibold">
 			<span className="text-right">{now},</span>
 			<span>
 				às{' '}
