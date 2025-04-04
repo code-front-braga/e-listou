@@ -27,8 +27,8 @@ export function Items({ item }: ItemsProps) {
 	const form = useForm<EditItemData>({
 		resolver: zodResolver(editItemSchema),
 		defaultValues: {
-			price: item.price,
-			quantity: item.quantity,
+			price: 0,
+			quantity: 0,
 		},
 	});
 	const { closeDeleteItemForm, editItemContext, deleteItemContext } =
@@ -41,7 +41,7 @@ export function Items({ item }: ItemsProps) {
 	async function handleEditItem(data: EditItemData) {
 		setEditItemLoading(true);
 
-		const resPromise = editItem({ ...data, id: item.id });
+		const resPromise = editItem({ ...item });
 		showPromiseToast({
 			loading: 'Editando...',
 			promise: resPromise,
@@ -69,7 +69,7 @@ export function Items({ item }: ItemsProps) {
 	async function handleDeleteItem() {
 		setDeleteItemLoading(true);
 
-		const resPromise = deleteItem({ id: item.id });
+		const resPromise = deleteItem({ ...item });
 		showPromiseToast({
 			loading: 'Deletando...',
 			promise: resPromise,
@@ -78,11 +78,8 @@ export function Items({ item }: ItemsProps) {
 		try {
 			const res = await resPromise;
 			if (res.success) {
-				deleteItemContext({ ...item, id: item.id });
+				deleteItemContext({ ...item });
 				closeDeleteItemForm();
-			}
-			if (res.error) {
-				console.error(res.error);
 			}
 		} catch (error) {
 			console.error(error);

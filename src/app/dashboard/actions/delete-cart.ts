@@ -6,11 +6,12 @@ import { CartStatus } from '@prisma/client';
 
 export async function deleteCart() {
 	const session = await auth();
-	if (!session?.user?.id) return { error: 'Usuário não autenticado.' };
+	const userId = session?.user?.id;
+	if (!userId) return { error: 'Usuário não autenticado.' };
 
 	try {
 		const existingCart = await db.cart.findFirst({
-			where: { userId: session.user.id, status: CartStatus.PENDING },
+			where: { userId, status: CartStatus.PENDING },
 		});
 
 		if (existingCart) {

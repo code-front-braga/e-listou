@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'motion/react';
 import { FaOpencart } from 'react-icons/fa';
 
 export function AuthTitle() {

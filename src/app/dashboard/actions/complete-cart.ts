@@ -7,11 +7,12 @@ import { calculateTotal } from '@/utils/calculate-total';
 
 export async function completeCart() {
 	const session = await auth();
-	if (!session?.user?.id) return { error: 'Usuário não autenticado.' };
+	const userId = session?.user?.id;
+	if (!userId) return { error: 'Usuário não autenticado.' };
 
 	try {
 		const existingCart = await db.cart.findFirst({
-			where: { userId: session.user.id, status: CartStatus.PENDING },
+			where: { userId, status: CartStatus.PENDING },
 			include: { items: true },
 		});
 
@@ -23,7 +24,7 @@ export async function completeCart() {
 				data: { status: CartStatus.COMPLETED, completedAt: new Date(), total },
 			});
 
-			return { success: 'Compra finalizada com sucesso!' };
+			return { success: 'Compra finalizada com sucesso! Dê uma olhadinha no seu histórico.' };
 		}
 		return { error: 'Carrinho não encontrado.' };
 	} catch (error) {

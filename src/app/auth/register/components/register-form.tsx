@@ -72,18 +72,14 @@ export function RegisterForm() {
 		setSubmitLoading(true);
 
 		try {
-			const resPromise = createUser(data);
+			const resPromise = createUser({ ...data });
 			showPromiseToast({
 				loading: 'Cadastrando usuário...',
 				promise: resPromise,
 			});
 			const res = await resPromise;
-			if (res.success) {
-				router.push('/auth/login');
-			}
-			if (res.error) {
-				setStep('email-step');
-			}
+			if (res.success) router.push('/auth/login');
+			if (res.error) setStep('email-step');
 		} catch (error) {
 			console.error('Erro ao cadastrar o usuário:', error);
 		} finally {

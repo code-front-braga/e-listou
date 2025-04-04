@@ -15,7 +15,7 @@ export function FullTime() {
 		second: 0,
 	});
 
-	const now = new Date().toLocaleDateString('pt-BR', {
+	const currentTime = new Date().toLocaleDateString('pt-BR', {
 		dateStyle: 'full',
 	});
 
@@ -36,7 +36,7 @@ export function FullTime() {
 
 	return (
 		<div className="text-christalle flex flex-col items-end text-xs font-semibold">
-			<span className="text-right">{now},</span>
+			<span className="text-right">{currentTime},</span>
 			<span>
 				às{' '}
 				{formatTime({

@@ -18,6 +18,8 @@ export function ItemsList() {
 	const [cancelCartLoading, setCancelCartLoading] = useState<boolean>(false);
 	const [completeCartLoading, setCompleteCartLoading] =
 		useState<boolean>(false);
+	const [isCompleteDialogOpen, setIsCompleteDialogOpen] =
+		useState<boolean>(false);
 
 	function handleSuccess() {
 		completeCartContext();
@@ -34,12 +36,7 @@ export function ItemsList() {
 
 		try {
 			const res = await resPromise;
-			if (res.success) {
-				handleSuccess();
-			}
-			if (res.error) {
-				console.error(res.error);
-			}
+			if (res.success) handleSuccess();
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -58,12 +55,7 @@ export function ItemsList() {
 
 		try {
 			const res = await resPromise;
-			if (res.success) {
-				handleSuccess();
-			}
-			if (res.error) {
-				console.error(res.error);
-			}
+			if (res.success) handleSuccess();
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -71,9 +63,8 @@ export function ItemsList() {
 		}
 	}
 
-	function handleOpenDialogConfirm() {
-		setIsCancelDialogOpen(true);
-	}
+	const handleOpenCompleteDialog = () => setIsCompleteDialogOpen(true);
+	const handleOpenCancelDialog = () => setIsCancelDialogOpen(true);
 
 	return (
 		<>
@@ -85,7 +76,7 @@ export function ItemsList() {
 
 					<button
 						type="button"
-						onClick={handleSubmitCart}
+						onClick={handleOpenCompleteDialog}
 						className="bg-cadetBlue mt-2 flex items-center justify-between rounded px-4 py-2 text-white"
 					>
 						{completeCartLoading ? (
@@ -102,7 +93,7 @@ export function ItemsList() {
 					</button>
 					<button
 						type="button"
-						onClick={handleOpenDialogConfirm}
+						onClick={handleOpenCancelDialog}
 						className="bg-cabaret mt-2 flex items-center justify-between rounded px-4 py-2 text-white"
 						disabled={cancelCartLoading}
 					>
@@ -152,10 +143,20 @@ export function ItemsList() {
 
 			<AddItemForm />
 
+			{isCompleteDialogOpen && (
+				<ConfirmDialog
+					title="Atenção"
+					description="Não ficou faltando algo? Quer mesmo finalizar a compra?"
+					handleFunction={handleSubmitCart}
+					isCancelDialogOpen={isCompleteDialogOpen}
+					setIsCancelDialogOpen={setCompleteCartLoading}
+				/>
+			)}
+
 			{isCancelDialogOpen && (
 				<ConfirmDialog
 					title="Atenção"
-					description="Tem certeza que deseja deletar o carrinho?"
+					description="Você já adicionou item(s). Tem certeza que deseja deletar o carrinho?"
 					handleFunction={handleCancelCart}
 					isCancelDialogOpen={isCancelDialogOpen}
 					setIsCancelDialogOpen={setIsCancelDialogOpen}

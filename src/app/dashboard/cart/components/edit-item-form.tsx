@@ -39,7 +39,7 @@ export function EditItemForm({
 						name="price"
 						render={({ field }) => (
 							<FormItem className="flex-1">
-								<FormLabel className="text-moonRaker">Preço Unitário</FormLabel>
+								<FormLabel className="text-moonRaker">Novo Preço</FormLabel>
 								<FormControl>
 									<Input
 										type="text"

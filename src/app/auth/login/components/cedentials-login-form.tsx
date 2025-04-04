@@ -46,7 +46,7 @@ export function CredentialsLoginForm() {
 	async function handleLogin(data: CredentialsLoginData) {
 		setLoginLoading(true);
 
-		const resPromise = login(data);
+		const resPromise = login({ ...data });
 		showPromiseToast({
 			loading: 'Logando...',
 			promise: resPromise,

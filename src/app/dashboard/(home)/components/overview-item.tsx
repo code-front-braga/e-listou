@@ -1,7 +1,7 @@
 interface OverviewItemProps {
 	title: string;
 	description: string;
-	children: Readonly<React.ReactNode>;
+	children: React.ReactNode;
 }
 
 export function OverviewItem({

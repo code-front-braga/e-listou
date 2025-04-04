@@ -11,7 +11,8 @@ interface EditItemProps
 
 export async function editItem(item: EditItemProps) {
 	const session = await auth();
-	if (!session?.user?.id) return { error: 'Usuário não autenticado.' };
+	const userId = session?.user?.id;
+	if (!userId) return { error: 'Usuário não autenticado.' };
 
 	try {
 		const existingItem = await db.item.findFirst({

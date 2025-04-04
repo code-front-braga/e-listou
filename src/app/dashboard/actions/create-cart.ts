@@ -8,13 +8,14 @@ import { firstLetterToUpperCase } from '@/utils/first-letter-to-upper-case';
 
 export async function createCart(data: SupermarketNameData) {
 	const session = await auth();
-	if (!session?.user?.id) {
+	const userId = session?.user?.id;
+	if (!userId) {
 		return { error: 'Usuário não autenticado.' };
 	}
 
 	try {
 		const existingCart = await db.cart.findFirst({
-			where: { userId: session?.user?.id, status: CartStatus.PENDING },
+			where: { userId, status: CartStatus.PENDING },
 		});
 		if (existingCart)
 			return { error: 'Existe um carrinho pendente. Finalize-o primeiro.' };
@@ -25,7 +26,7 @@ export async function createCart(data: SupermarketNameData) {
 
 		await db.cart.create({
 			data: {
-				userId: session?.user?.id,
+				userId,
 				supermarket: formattedSupermarketName,
 				status: CartStatus.PENDING,
 				total: 0,

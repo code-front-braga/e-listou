@@ -12,16 +12,18 @@ export default async function HistoryDetailsPage({
 	params,
 }: HistoryDetailsProps) {
 	const session = await auth();
+	const userId = session?.user?.id;
+
 	const { id } = await params;
 	const cartData = await getDetails({ id });
 
 	const overviewExpensive = await db.item.findFirst({
-		where: { cart: { userId: session?.user?.id, id } },
+		where: { cart: { userId, id } },
 		orderBy: { totalPrice: 'desc' },
 	});
 
 	const overviewCheapest = await db.item.findFirst({
-		where: { cart: { userId: session?.user?.id, id: id } },
+		where: { cart: { userId, id } },
 		orderBy: { totalPrice: 'asc' },
 	});
 

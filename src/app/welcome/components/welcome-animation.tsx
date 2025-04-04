@@ -1,6 +1,6 @@
 'use client';
 
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { motion } from 'motion/react';
 import { useRouter } from 'next/navigation';
 import { FaOpencart } from 'react-icons/fa';
@@ -8,7 +8,7 @@ import { updateLogin } from '../actions/update-login';
 import { showPromiseToast } from '@/components/promise-toast';
 
 interface AnimateScreenProps {
-	user: Pick<User, 'name' | 'email'>;
+	user: Prisma.UserGetPayload<{ select: { name: true; email: true } }>;
 }
 
 const gradientVariants = {

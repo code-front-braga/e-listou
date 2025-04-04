@@ -1,3 +1,5 @@
+'use client';
+
 import { useContext } from 'react';
 import { RegisterContext } from '../context/register-context';
 import { motion } from 'motion/react';

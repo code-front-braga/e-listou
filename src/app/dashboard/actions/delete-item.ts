@@ -9,7 +9,8 @@ interface DeleteItemProps
 
 export async function deleteItem(item: DeleteItemProps) {
 	const session = await auth();
-	if (!session?.user?.id) return { error: 'Usuário não autenticado.' };
+	const userId = session?.user?.id;
+	if (!userId) return { error: 'Usuário não autenticado.' };
 
 	try {
 		const existingItem = await db.item.findFirst({

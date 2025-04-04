@@ -36,7 +36,7 @@ export function AddItemForm() {
 	async function handleAddNewItem(data: AddNewItemData) {
 		setAddItemLoading(true);
 
-		const resPromise = addItem(data);
+		const resPromise = addItem({ ...data });
 		showPromiseToast({
 			loading: 'Adicionando...',
 			promise: resPromise,
@@ -60,7 +60,6 @@ export function AddItemForm() {
 		form.reset();
 		closeAddItemForm();
 	}
-
 
 	return (
 		<AnimatePresence>

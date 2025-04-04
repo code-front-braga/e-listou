@@ -1,5 +1,5 @@
 import { formatToCurrencyBRL } from '@/utils/format-to-currency-brl';
-import { Item, Prisma } from '@prisma/client';
+import { Item } from '@prisma/client';
 
 interface OverviewProps {
 	overviewExpensive: Item | null;

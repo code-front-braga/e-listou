@@ -1,4 +1,4 @@
-import { Cart, User } from '@prisma/client';
+import { Cart, Prisma, User } from '@prisma/client';
 import { getOverviewData } from '../../actions/get-overview-data';
 import { formatToDateBRL } from '@/utils/format-to-date-brl';
 import { OverviewItem } from './overview-item';
@@ -8,13 +8,13 @@ import { WelcomeScreen } from './welcome-screen';
 import { formatToCurrencyBRL } from '@/utils/format-to-currency-brl';
 
 interface OverviewProps {
-	user: Pick<User, 'name' | 'id'>;
+	user: Prisma.UserGetPayload<{ select: { id: true; name: true } }>;
 }
 
 interface OverviewItem {
 	title: string;
 	description: string | number;
-	cartData?: Cart;
+	cartData?: Cart | null;
 }
 
 export async function Overview({ user }: OverviewProps) {
@@ -34,7 +34,7 @@ export async function Overview({ user }: OverviewProps) {
 		},
 		{
 			title: 'Compra de Maior Valor',
-			description: formatToCurrencyBRL(overviewData.maxPurchaseTotal ?? 0),
+			description: formatToCurrencyBRL(overviewData.maxPurchaseTotal ?? ''),
 		},
 		{
 			title: 'Total de Compras',

@@ -1,22 +1,25 @@
 'use server';
 
 import { db } from '@/lib/db/prisma';
-import { CartStatus } from '@prisma/client';
+import { CartStatus, Prisma } from '@prisma/client';
 
-export async function getOverviewData(userId: string) {
+interface GetOverviewDataProps
+	extends Prisma.UserGetPayload<{ select: { id: true } }> {}
+
+export async function getOverviewData(user: GetOverviewDataProps) {
 	try {
 		const lastPurchaseDate = await db.cart.findFirst({
-			where: { userId, status: CartStatus.COMPLETED },
+			where: { userId: user.id, status: CartStatus.COMPLETED },
 			orderBy: { completedAt: 'desc' },
 		});
 
 		const maxPurchaseTotal = await db.cart.findFirst({
-			where: { userId, status: CartStatus.COMPLETED },
+			where: { userId: user.id, status: CartStatus.COMPLETED },
 			orderBy: { total: 'desc' },
 		});
 
 		const aggregatedData = await db.cart.aggregate({
-			where: { userId, status: CartStatus.COMPLETED },
+			where: { userId: user.id, status: CartStatus.COMPLETED },
 			_sum: { total: true },
 			_count: { _all: true },
 		});
@@ -24,7 +27,7 @@ export async function getOverviewData(userId: string) {
 		const totalPurchases = aggregatedData._count._all || 0;
 
 		const frequentItemData = await db.item.groupBy({
-			where: { cart: { userId, status: CartStatus.COMPLETED } },
+			where: { cart: { userId: user.id, status: CartStatus.COMPLETED } },
 			by: ['id'],
 			_count: { id: true },
 			orderBy: { _count: { id: 'desc' } },
@@ -39,7 +42,7 @@ export async function getOverviewData(userId: string) {
 		}
 
 		const favouriteSupermarketData = await db.cart.groupBy({
-			where: { userId, status: CartStatus.COMPLETED },
+			where: { userId: user.id, status: CartStatus.COMPLETED },
 			by: ['supermarket'],
 			_count: { supermarket: true },
 			orderBy: { _count: { supermarket: 'desc' } },

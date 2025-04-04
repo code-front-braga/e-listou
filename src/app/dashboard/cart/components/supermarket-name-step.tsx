@@ -48,9 +48,6 @@ export function SupermarketNameStep() {
 				nextStep();
 				form.reset();
 			}
-			if (res.error) {
-				console.error('Erro ao tentar criar o carrinho:', res.error);
-			}
 		} catch (error) {
 			console.error('Erro ao tentar salvar o carrinho:', error);
 		} finally {
