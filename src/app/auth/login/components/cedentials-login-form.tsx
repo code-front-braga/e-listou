@@ -15,7 +15,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaSignInAlt } from 'react-icons/fa';
-import { ImSpinner } from 'react-icons/im';
 import { BeatLoader } from 'react-spinners';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import { login } from '../../actions/login';
@@ -56,10 +55,9 @@ export function CredentialsLoginForm() {
 			const res = await resPromise;
 			if (res.success) {
 				const user = await getUserByEmail(data.email);
+				const firstLogin = user?.isFirstLogin === true;
 
-				user?.isFirstLogin === true
-					? router.push('/welcome')
-					: router.push('/dashboard');
+				firstLogin ? router.push('/welcome') : router.push('/dashboard');
 			}
 		} catch (error) {
 			console.error(error);

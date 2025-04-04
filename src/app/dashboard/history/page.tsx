@@ -1,4 +1,4 @@
-import { getAllCompletedCart } from '../actions/get-all-completed-cart';
+import { getAllCompletedCart } from '../services/get-all-completed-cart';
 import { DashboardSection } from '../components/dashboard-section';
 import { HistoriesList } from './components/histories-list';
 import { SearchCompletedCart } from './components/search-completed-cart';
@@ -16,13 +16,13 @@ export default async function DashboardHistoryPage() {
 	}
 
 	return (
-		<DashboardSection>
-			<HistoryProvider>
+		<HistoryProvider>
+			<DashboardSection>
 				<div className="flex h-full w-full flex-col items-center gap-6 overflow-hidden">
 					<SearchCompletedCart carts={carts} />
 					<HistoriesList carts={carts} />
 				</div>
-			</HistoryProvider>
-		</DashboardSection>
+			</DashboardSection>
+		</HistoryProvider>
 	);
 }

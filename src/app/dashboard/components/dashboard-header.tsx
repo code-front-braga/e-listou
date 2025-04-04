@@ -1,8 +1,8 @@
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 import { LogoutForm } from './logout-form';
 
 interface DashboardHeaderProps {
-	user: Pick<User, 'name' | 'email'>;
+	user: Prisma.UserGetPayload<{ select: { name: true; email: true } }>;
 }
 
 export function DashboardHeader({ user }: DashboardHeaderProps) {

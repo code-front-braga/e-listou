@@ -15,7 +15,9 @@ export function InitStep() {
 		return (
 			<div className="flex h-full flex-col items-center justify-center gap-4">
 				<MoonLoader size={28} color="#d94e67" />
-				<p>Verificando se possui carrinho pendente...</p>
+				<p className="text-christalle">
+					Verificando se possui carrinho pendente...
+				</p>
 			</div>
 		);
 	}

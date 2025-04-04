@@ -86,7 +86,7 @@ export function ItemsList() {
 					<button
 						type="button"
 						onClick={handleSubmitCart}
-						className="bg-cadetBlue flex items-center justify-between rounded px-4 py-2 text-white shadow-[0_-4px_12px_#00000045]"
+						className="bg-cadetBlue mt-2 flex items-center justify-between rounded px-4 py-2 text-white"
 					>
 						{completeCartLoading ? (
 							<>
@@ -95,7 +95,7 @@ export function ItemsList() {
 							</>
 						) : (
 							<>
-								Finalizar
+								Finalizar Compra
 								<TbShoppingCartCopy size={24} />
 							</>
 						)}

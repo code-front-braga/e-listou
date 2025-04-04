@@ -44,7 +44,7 @@ export function SearchCompletedCart({ carts }: SearchCompletedCartProps) {
 		if (filteredCarts.length === 0 && isClearedButtonClicked) {
 			toast.error('Ops!', {
 				description:
-					'Compra não encontrada. Verifique se digitou corretamente o nome do supermercado ou a data (dd-mm-aaaa)',
+					'Compra não encontrada. Verifique se digitou corretamente o nome do supermercado ou a data (dd/mm/aaaa)',
 				position: 'top-center',
 			});
 

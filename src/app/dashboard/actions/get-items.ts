@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/lib/db/prisma';
-import { Item, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 interface GetItemsProps
 	extends Prisma.ItemGetPayload<{ select: { cartId: true } }> {}
