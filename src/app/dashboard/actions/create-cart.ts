@@ -36,9 +36,9 @@ export async function createCart(data: SupermarketNameData) {
 		return {
 			success: 'Carrinho criado com sucesso! Comece a adicionar produtos.',
 		};
-	} catch (error: any) {
+	} catch (error) {
 		return {
-			error: `Erro interno ao criar o carrinho. Tente novamente: ${error.message}`,
+			error: `Erro interno ao criar o carrinho. Tente novamente: ${error}`,
 		};
 	}
 }

@@ -30,9 +30,9 @@ export async function completeCart() {
 			};
 		}
 		return { error: 'Carrinho não encontrado.' };
-	} catch (error: any) {
+	} catch (error) {
 		return {
-			error: `Ocorreu um erro inesperado. Não foi possível finalizar sua compra: ${error.message}`,
+			error: `Ocorreu um erro inesperado. Não foi possível finalizar sua compra: ${error}`,
 		};
 	}
 }
