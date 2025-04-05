@@ -1,6 +1,12 @@
 import { redirect } from 'next/navigation';
 import { auth } from '../../../auth';
 import { WelcomeAnimation } from './components/welcome-animation';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Seja bem-vindo(a)',
+	description: 'Seu supermercado, do seu jeito.',
+};
 
 export default async function WelcomePage() {
 	const session = await auth();
