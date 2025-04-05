@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✅ e-listou!
 
-## Getting Started
+<div style="text-align: center">
+<img src='/public/site_1.png' alt='Página Home da landing page do projeto' />
+<img src='/public/welcome_1.png' alt='Página de boas-vindas ao fazer primeiro login' />
+<img src='/public/first_screen.png' alt='Página inicial do dashboard' />
+<img src='/public/items_added.png' alt='Página para adicionar itens no carrinho de compras' />
+<img src='/public/history_details.png' alt='Detalhes da compra' />
+</div>
 
-First, run the development server:
+Bem-vindo ao **e-listou!**, um aplicativo web desenvolvido para simplificar o gerenciamento das suas compras de supermercado.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🖥️ Demonstração
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🔗 [Acesse o e-listou! e controle suas compras no supermercado!](https://currency-swift-chi.vercel.app)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📋 Funcionalidades
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Autenticação de usuários através das credenciais e Google.
+- Criação e gerenciamento de listas de compras personalizadas.
+- Adição e remoção de itens com facilidade.
+- Cálculo automático do total da compra.
+- Histórico completo de compras anteriores.
+- Busca eficiente por compras no histórico.
+- Interface responsiva, otimizada para todos os dispositivos.
 
-## Learn More
+## 🚀 Tecnologias Utilizadas
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js 15 (App Router)](https://nextjs.org/)
+- [Prisma ORM](https://www.prisma.io)
+- [Neon PostgreSQL](https://neon.tech)
+- [AuthJS v5](https://authjs.dev)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn](https://ui.shadcn.com)
+- [Framer Motion](https://www.framer.com/motion/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Como Executar o Projeto Localmente
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Siga os passos abaixo para rodar o projeto no seu ambiente local:
 
-## Deploy on Vercel
+1. Clone o repositório:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   git@github.com:code-front-braga/e-listou.git
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Instale as dependências:
+
+   ```bash
+   npm install
+   ```
+
+3. Configure as variáveis de ambiente:
+
+Crie um arquivo .env.local na raiz do projeto.
+Adicione as variáveis de ambiente necessárias, como a URL do banco de dados PostgreSQL e as chaves secretas do Auth.js.
+
+4. Abra o navegador e acesse::
+   ```bash
+   http://localhost:3000
+   ```
+
+## ✉️ Contato
+
+Se tiver dúvidas ou sugestões, entre em contato comigo:
+
+- LinkedIn: [Leonardo Braga](https://www.linkedin.com/in/leonardo-braga-8b7856216/)
+
+## 📝 Licença:
+
+Este projeto está licenciado sob a licença MIT.
