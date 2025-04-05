@@ -48,12 +48,12 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
 		<>
 			<header className="bg-christalle flex h-24 w-full px-4">
 				<div className="m-auto flex w-full items-center justify-between">
-					<div>
+					<div className="w-auto">
 						<p className="truncate overflow-hidden text-lg text-ellipsis whitespace-nowrap text-white">
 							Olá,
 						</p>
 						<DropdownMenu>
-							<DropdownMenuTrigger className="bg-moonRaker/25 flex w-full items-center gap-1.5 rounded p-1 px-1.5 text-white outline-0">
+							<DropdownMenuTrigger className="bg-moonRaker/25 flex w-full items-center justify-between gap-1.5 rounded p-1 px-1.5 text-white outline-0">
 								<span className="truncate overflow-hidden text-sm text-ellipsis whitespace-nowrap">
 									{user.name}
 								</span>

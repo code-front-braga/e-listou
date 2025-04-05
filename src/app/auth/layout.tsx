@@ -32,7 +32,7 @@ export default async function AuthLayout({
 	if (session) redirect('/dashboard');
 
 	return (
-		<main className="flex min-h-screen w-full flex-col items-center justify-center md:flex-row">
+		<main className="flex min-h-screen w-full flex-col items-center justify-center overflow-hidden md:flex-row">
 			<AuthBackground />
 			<AuthTitle />
 			{children}

@@ -16,9 +16,9 @@ export function HistoriesList({ carts }: HistoriesListProps) {
 
 	if (carts.length === 0) {
 		return (
-			<div className="text-cabaret self-start text-lg">
+			<p className="text-cabaret self-start text-sm">
 				No momento você não tem histórico de compras.
-			</div>
+			</p>
 		);
 	}
 

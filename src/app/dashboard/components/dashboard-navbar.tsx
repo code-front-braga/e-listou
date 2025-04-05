@@ -29,7 +29,7 @@ export default function DashboarNavbar() {
 	});
 
 	return (
-		<nav className="bg-cabaret fixed bottom-0 flex h-18 w-full items-center justify-between px-4">
+		<nav className="bg-cabaret flex h-18 w-full items-center justify-between px-4">
 			{dashLinks}
 		</nav>
 	);
