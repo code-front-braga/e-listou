@@ -24,13 +24,15 @@ export async function completeCart() {
 				data: { status: CartStatus.COMPLETED, completedAt: new Date(), total },
 			});
 
-			return { success: 'Compra finalizada com sucesso! Dê uma olhadinha no seu histórico.' };
+			return {
+				success:
+					'Compra finalizada com sucesso! Dê uma olhadinha no seu histórico.',
+			};
 		}
 		return { error: 'Carrinho não encontrado.' };
-	} catch (error) {
+	} catch (error: any) {
 		return {
-			error:
-				'Ocorreu um erro inesperado. Não foi possível finalizar sua compra.',
+			error: `Ocorreu um erro inesperado. Não foi possível finalizar sua compra: ${error.message}`,
 		};
 	}
 }

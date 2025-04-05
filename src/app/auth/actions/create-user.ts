@@ -35,7 +35,7 @@ export async function createUser(data: RegisterData) {
 		});
 
 		return { success: 'Usuário cadastrado com sucesso!', newUser };
-	} catch (error) {
-		return { error: 'Ocorreu um erro ao cadastrar o usuário.' };
+	} catch (error: any) {
+		return { error: `Erro ao criar o usuário: ${error.message}` };
 	}
 }
