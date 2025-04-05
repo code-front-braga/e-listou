@@ -18,14 +18,13 @@ interface OverviewItem {
 }
 
 export async function Overview({ user }: OverviewProps) {
-	const overviewData = await getOverviewData(user.id);
+	const overviewData = await getOverviewData({ id: user.id });
 
 	if (!overviewData) {
 		return <p>Erro ao carregar dados!</p>;
 	}
 
-	if (overviewData.totalPurchases === 0)
-		return <WelcomeScreen user={user.name as string} />;
+	if (overviewData.totalPurchases === 0) return <WelcomeScreen user={user} />;
 
 	const overviewItens: OverviewItem[] = [
 		{

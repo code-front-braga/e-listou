@@ -3,9 +3,10 @@
 import { RiArrowDownDoubleLine } from 'react-icons/ri';
 import { motion } from 'motion/react';
 import { CheckCircle } from 'lucide-react';
+import { Prisma } from '@prisma/client';
 
 interface WelcomeScreenProps {
-	user: string;
+	user: Prisma.UserGetPayload<{ select: { name: true } }>;
 }
 
 export function WelcomeScreen({ user }: WelcomeScreenProps) {
@@ -13,7 +14,7 @@ export function WelcomeScreen({ user }: WelcomeScreenProps) {
 		<div className="flex h-[calc(100vh-168px)] flex-col items-center justify-between p-4 text-center">
 			<div className="m-auto flex flex-col gap-4">
 				<h2 className="text-cabaret text-xl font-semibold">
-					E aí, <span className="text-christalle">{user}</span>! 👋
+					E aí, <span className="text-christalle">{user.name}</span>! 👋
 				</h2>
 				<p className="text-christalle text-lg">
 					Tudo certo? Parece que você ainda não tem informações de compra para
