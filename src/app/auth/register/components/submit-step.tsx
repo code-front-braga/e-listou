@@ -53,7 +53,7 @@ export function SubmitStep({ loading }: SubmitStepProps) {
 				{loading ? (
 					<>
 						<span>Criando Sua Conta...</span>
-						<BeatLoader size={10} color="#fff" />
+						<BeatLoader size={8} color="#fff" />
 					</>
 				) : (
 					<>

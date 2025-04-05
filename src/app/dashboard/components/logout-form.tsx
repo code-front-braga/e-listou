@@ -5,10 +5,7 @@ import { SlLogout } from 'react-icons/sl';
 export function LogoutForm() {
 	return (
 		<Form action={logout}>
-			<button
-				type="submit"
-				className="text-cabaret flex flex-col items-end gap-1"
-			>
+			<button type="submit" className="text-cabaret flex flex-col gap-1">
 				<SlLogout size={22} />
 				<span className="text-cabaret">Sair</span>
 			</button>

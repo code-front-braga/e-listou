@@ -134,7 +134,7 @@ export function CredentialsLoginForm() {
 					{loginLoading ? (
 						<>
 							<span>Entrando...</span>
-							<BeatLoader size={10} color="#fff" />
+							<BeatLoader size={8} color="#fff" />
 						</>
 					) : (
 						<>
