@@ -4,12 +4,11 @@ import { auth } from '../../../../auth';
 import { db } from '@/lib/db/prisma';
 import { Prisma } from '@prisma/client';
 
-interface EditItemProps
-	extends Prisma.ItemGetPayload<{
+export async function editItem(
+	item: Prisma.ItemGetPayload<{
 		select: { id: true; price: true; quantity: true };
-	}> {}
-
-export async function editItem(item: EditItemProps) {
+	}>,
+) {
 	const session = await auth();
 	const userId = session?.user?.id;
 	if (!userId) return { error: 'Usuário não autenticado.' };

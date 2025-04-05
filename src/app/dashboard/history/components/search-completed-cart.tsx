@@ -51,14 +51,14 @@ export function SearchCompletedCart({ carts }: SearchCompletedCartProps) {
 			setIsClearedButtonClicked(false);
 			form.reset();
 		}
-	}, [filteredCarts, setIsClearedButtonClicked]);
+	}, [filteredCarts, isClearedButtonClicked, setIsClearedButtonClicked, form]);
 
 	useEffect(() => {
 		if (supermarketName === '') {
 			clearSearchPurchaseContext(carts);
 			setIsClearedButtonClicked(false);
 		}
-	}, [supermarketName]);
+	}, [supermarketName, carts]);
 
 	function handleSearchCart(data: SupermarketNameData) {
 		console.log('search clicado');

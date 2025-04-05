@@ -1,6 +1,6 @@
 'use client';
 
-import { Prisma, User } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { motion } from 'motion/react';
 import { useRouter } from 'next/navigation';
 import { FaOpencart } from 'react-icons/fa';

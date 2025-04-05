@@ -22,7 +22,7 @@ export const pages: SitePagesProps[] = [
 	{ name: 'Tech', url: '#site-techs', icon: IoMdSettings },
 ];
 
-export default function Navbar() {
+export function Navbar() {
 	const { activeHash, setActiveHash } = useScroll();
 	const { toggleMenu } = useContext(MenuToggleContext);
 

@@ -57,7 +57,11 @@ export function CredentialsLoginForm() {
 				const user = await getUserByEmail(data.email);
 				const firstLogin = user?.isFirstLogin === true;
 
-				firstLogin ? router.push('/welcome') : router.push('/dashboard');
+				if (firstLogin) {
+					router.push('/welcome');
+				} else {
+					router.push('/dashboard');
+				}
 			}
 		} catch (error) {
 			console.error(error);

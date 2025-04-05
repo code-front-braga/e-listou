@@ -30,13 +30,14 @@ export function RegisterForm() {
 	const [showConfirmPassword, setShowConfirmPassword] =
 		useState<boolean>(false);
 	const [submitLoading, setSubmitLoading] = useState<boolean>(false);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const router = useRouter();
 
 	useEffect(() => {
 		if (fieldMap[step]) {
 			form.setFocus(fieldMap[step]);
 		}
-	}, [step]);
+	}, [form, step]);
 
 	const handleNextStep = useCallback(
 		async (fieldName: keyof RegisterData, nextStep: RegisterSteps) => {
@@ -70,6 +71,7 @@ export function RegisterForm() {
 
 	async function handleRegisterUser(data: RegisterData) {
 		setSubmitLoading(true);
+		setErrorMessage(null);
 
 		try {
 			const resPromise = createUser({ ...data });
@@ -78,8 +80,12 @@ export function RegisterForm() {
 				promise: resPromise,
 			});
 			const res = await resPromise;
-			if (res.success) router.push('/auth/login');
-			if (res.error) setStep('email-step');
+			if (res.success) {
+				router.push('/auth/login');
+			} else if (res.error) {
+				setErrorMessage(res.error);
+				setStep('email-step');
+			}
 		} catch (error) {
 			console.error('Erro ao cadastrar o usuário:', error);
 		} finally {
@@ -93,6 +99,9 @@ export function RegisterForm() {
 				onSubmit={form.handleSubmit(handleRegisterUser)}
 				className="relative mx-auto mt-2.5 flex w-full flex-col items-center gap-3.5 overflow-hidden"
 			>
+				{errorMessage && (
+					<p className="text-cabaret">{errorMessage}</p>
+				)}
 				<AnimatePresence mode="wait">
 					{step === 'name-step' && (
 						<InputStepModel

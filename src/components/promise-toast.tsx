@@ -5,15 +5,12 @@ interface RegisterResponse {
 	error?: string;
 }
 
-interface ShowPromiseToastProps<T> {
+interface ShowPromiseToastProps {
 	promise: Promise<RegisterResponse>;
 	loading: string;
 }
 
-export function showPromiseToast<T>({
-	promise,
-	loading,
-}: ShowPromiseToastProps<T>) {
+export function showPromiseToast({ promise, loading }: ShowPromiseToastProps) {
 	return toast.promise(promise, {
 		loading: loading,
 		success: data => {

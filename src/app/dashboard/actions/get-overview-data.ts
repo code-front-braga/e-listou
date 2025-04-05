@@ -3,10 +3,9 @@
 import { db } from '@/lib/db/prisma';
 import { CartStatus, Prisma } from '@prisma/client';
 
-interface GetOverviewDataProps
-	extends Prisma.UserGetPayload<{ select: { id: true } }> {}
-
-export async function getOverviewData(user: GetOverviewDataProps) {
+export async function getOverviewData(
+	user: Prisma.UserGetPayload<{ select: { id: true } }>,
+) {
 	try {
 		const lastPurchaseDate = await db.cart.findFirst({
 			where: { userId: user.id, status: CartStatus.COMPLETED },

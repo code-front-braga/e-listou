@@ -16,6 +16,7 @@ export function ItemsList() {
 	const { items, completeCartContext, setStep } = useContext(CartContext);
 	const [isCancelDialogOpen, setIsCancelDialogOpen] = useState<boolean>(false);
 	const [cancelCartLoading, setCancelCartLoading] = useState<boolean>(false);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const [completeCartLoading, setCompleteCartLoading] =
 		useState<boolean>(false);
 	const [isCompleteDialogOpen, setIsCompleteDialogOpen] =
@@ -28,6 +29,8 @@ export function ItemsList() {
 
 	async function handleSubmitCart() {
 		setCompleteCartLoading(true);
+		setErrorMessage(null);
+
 		const resPromise = completeCart();
 		showPromiseToast({
 			loading: 'Finalizando sua compra...',
@@ -36,7 +39,11 @@ export function ItemsList() {
 
 		try {
 			const res = await resPromise;
-			if (res.success) handleSuccess();
+			if (res.success) {
+				handleSuccess();
+			} else if (res.error) {
+				setErrorMessage(res.error);
+			}
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -74,6 +81,7 @@ export function ItemsList() {
 						{items?.map(item => <Items key={item.id} item={item} />)}
 					</ul>
 
+					{errorMessage && <p className="text-cabaret">{errorMessage}</p>}
 					<button
 						type="button"
 						onClick={handleOpenCompleteDialog}

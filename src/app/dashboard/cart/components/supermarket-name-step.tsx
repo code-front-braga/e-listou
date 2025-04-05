@@ -28,12 +28,14 @@ export function SupermarketNameStep() {
 	});
 	const { nextStep, backStep, handleSupermarketName } = useContext(CartContext);
 	const [loading, setLoading] = useState<boolean>(false);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const [shouldExit, setShouldExit] = useState<boolean>(false);
 
 	const handleBackStep = () => setShouldExit(true);
 
 	async function handleCreateCart(data: SupermarketNameData) {
 		setLoading(true);
+		setErrorMessage(null);
 
 		const resPromise = createCart({ ...data });
 		showPromiseToast({
@@ -47,6 +49,8 @@ export function SupermarketNameStep() {
 				handleSupermarketName(data);
 				nextStep();
 				form.reset();
+			} else if (res.error) {
+				setErrorMessage(res.error);
 			}
 		} catch (error) {
 			console.error('Erro ao tentar salvar o carrinho:', error);
@@ -81,8 +85,8 @@ export function SupermarketNameStep() {
 
 				<p className="text-christalle mb-4 text-justify text-base font-semibold">
 					Olá! Antes de criar sua lista, por favor, informe o nome do
-					supermercado onde você fará suas compras hoje e depois clique em{' '}
-					<span className="text-persimmon font-bold">"Começar"</span>.
+					supermercado onde você fará suas compras hoje e depois clique em
+					<span className="text-persimmon font-bold">&quot;Começar&quot;</span>.
 				</p>
 
 				<Form {...form}>
@@ -90,6 +94,7 @@ export function SupermarketNameStep() {
 						onSubmit={form.handleSubmit(handleCreateCart)}
 						className="flex h-full flex-col justify-between"
 					>
+						{errorMessage && <p className="text-cabaret">{errorMessage}</p>}
 						<FormField
 							control={form.control}
 							name="supermarketName"

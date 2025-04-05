@@ -1,4 +1,4 @@
-import { Cart, Prisma, User } from '@prisma/client';
+import { Cart, Prisma } from '@prisma/client';
 import { getOverviewData } from '../../actions/get-overview-data';
 import { formatToDateBRL } from '@/utils/format-to-date-brl';
 import { OverviewItem } from './overview-item';

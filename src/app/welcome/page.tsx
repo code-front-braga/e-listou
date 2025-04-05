@@ -9,7 +9,7 @@ export default async function WelcomePage() {
 	if (!session) redirect('/auth/login');
 
 	return (
-		<section className="min-h-svh w-full">
+		<section className="min-h-svh w-full overflow-hidden">
 			<WelcomeAnimation
 				user={{
 					name: userName as string,

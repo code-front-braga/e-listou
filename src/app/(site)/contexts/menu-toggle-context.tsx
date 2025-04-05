@@ -1,8 +1,6 @@
 'use client';
 
 import { createContext, useState } from 'react';
-import Navbar from '../components/header/mobile/mobile-navbar';
-import { AuthOptions } from '../components/header/mobile/auth-options';
 
 interface IMenuToggleContext {
 	isMenuClicked: boolean;

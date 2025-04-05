@@ -2,10 +2,9 @@ import { CartStatus, Prisma } from '@prisma/client';
 import { auth } from '../../../../auth';
 import { db } from '@/lib/db/prisma';
 
-interface GetDetailsProps
-	extends Prisma.CartGetPayload<{ select: { id: true } }> {}
-
-export async function getDetails(cart: GetDetailsProps) {
+export async function getDetails(
+	cart: Prisma.CartGetPayload<{ select: { id: true } }>,
+) {
 	const session = await auth();
 	const userId = session?.user?.id;
 

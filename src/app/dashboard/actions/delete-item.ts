@@ -4,10 +4,9 @@ import { Prisma } from '@prisma/client';
 import { auth } from '../../../../auth';
 import { db } from '@/lib/db/prisma';
 
-interface DeleteItemProps
-	extends Prisma.ItemGetPayload<{ select: { id: true } }> {}
-
-export async function deleteItem(item: DeleteItemProps) {
+export async function deleteItem(
+	item: Prisma.ItemGetPayload<{ select: { id: true } }>,
+) {
 	const session = await auth();
 	const userId = session?.user?.id;
 	if (!userId) return { error: 'Usuário não autenticado.' };
