@@ -25,7 +25,7 @@ export function useDeletePurchase(
 			if (res.success) {
 				router.push('/dashboard/history');
 			} else if (res.error) {
-				console.log(res.error);
+				console.error(res.error);
 			}
 		} catch (error) {
 			console.error(error);
