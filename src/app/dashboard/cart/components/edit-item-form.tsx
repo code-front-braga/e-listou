@@ -33,9 +33,11 @@ export function EditItemForm({
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)}>
-				<div className="text-cabaret mb-2 flex items-center justify-between gap-2">
-					<p>Preço Atual: {formatToCurrencyBRL(item.price)}</p>
-					<p>Qtd. Atual: {item.quantity}</p>
+				<div className="text-cabaret mb-2 flex items-center gap-2 text-xs">
+					<p className="flex-1">
+						Preço Atual: {formatToCurrencyBRL(item.price)}
+					</p>
+					<p className="flex-1">Quantidade Atual: {item.quantity}</p>
 				</div>
 				<div className="relative flex w-full items-center gap-4">
 					<FormField

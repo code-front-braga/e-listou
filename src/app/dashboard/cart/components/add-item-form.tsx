@@ -154,7 +154,7 @@ export function AddItemForm() {
 							<div className="mt-3 flex gap-2.5">
 								<Button
 									type="submit"
-									className="bg-cadetBlue font-gantari hover:bg-cadetBlue/85 mt-1.5 w-full flex-1 cursor-pointer rounded py-2.5 text-sm text-white"
+									className="bg-cadetBlue font-gantari hover:bg-cadetBlue/85 mt-1.5 w-full flex-1 overflow-hidden cursor-pointer rounded py-2.5 text-sm text-white"
 								>
 									{addItemLoading ? 'Adicionando Item...' : 'Adicionar Item'}
 								</Button>

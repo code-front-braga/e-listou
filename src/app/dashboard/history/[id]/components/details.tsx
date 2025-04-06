@@ -8,6 +8,8 @@ import { LuHistory } from 'react-icons/lu';
 import { Header } from './header';
 import { Separator } from '@/components/ui/separator';
 import Overview from './overview';
+import { useState } from 'react';
+import { ImSpinner } from 'react-icons/im';
 
 interface DetailsProps {
 	cart: Prisma.CartGetPayload<{ include: { items: true } }>;
@@ -20,6 +22,8 @@ export function Details({
 	overviewExpensive,
 	overviewCheapest,
 }: DetailsProps) {
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
 	return (
 		<>
 			<Header cart={cart} />
@@ -60,10 +64,15 @@ export function Details({
 				/>
 				<Link
 					href="/dashboard/history"
+					onClick={() => setIsLoading(true)}
 					className="text-christalle flex items-center gap-2 self-end font-semibold"
 				>
 					<span>Histórico</span>
-					<LuHistory size={24} className="text-cabaret" />
+					{isLoading ? (
+						<ImSpinner size={22} className="text-cabaret animate-spin" />
+					) : (
+						<LuHistory size={24} className="text-cabaret" />
+					)}
 				</Link>
 			</main>
 		</>
