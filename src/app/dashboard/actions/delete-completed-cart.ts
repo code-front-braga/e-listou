@@ -3,7 +3,6 @@
 import { CartStatus, Prisma } from '@prisma/client';
 import { auth } from '../../../../auth';
 import { db } from '@/lib/db/prisma';
-import { redirect } from 'next/navigation';
 
 export async function deleteCompletedCart(
 	cart: Prisma.CartGetPayload<{ select: { id: true } }>,
@@ -31,7 +30,6 @@ export async function deleteCompletedCart(
 
 		return { error: 'Erro ao deletar registro de compra.' };
 	} catch (error) {
-		console.error(error);
 		return {
 			error: `Ocorreu um erro ao deletar o registro de compra: ${error}`,
 		};
