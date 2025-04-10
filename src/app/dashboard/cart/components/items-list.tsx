@@ -71,6 +71,7 @@ export function ItemsList() {
 	}
 
 	const handleOpenCompleteDialog = () => setIsCompleteDialogOpen(true);
+
 	const handleOpenCancelDialog = () => setIsCancelDialogOpen(true);
 
 	return (
@@ -157,7 +158,7 @@ export function ItemsList() {
 					description="Não ficou faltando algo? Quer mesmo finalizar a compra?"
 					handleFunction={handleSubmitCart}
 					isCancelDialogOpen={isCompleteDialogOpen}
-					setIsCancelDialogOpen={setCompleteCartLoading}
+					setIsCancelDialogOpen={setIsCompleteDialogOpen}
 				/>
 			)}
 
