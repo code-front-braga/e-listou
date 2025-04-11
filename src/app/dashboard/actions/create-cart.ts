@@ -2,9 +2,9 @@
 
 import { db } from '@/lib/db/prisma';
 import { SupermarketNameData } from '@/lib/zod/cart';
-import { auth } from '../../../../auth';
 import { CartStatus } from '@prisma/client';
 import { firstLetterToUpperCase } from '@/utils/first-letter-to-upper-case';
+import { auth } from '../../../../auth';
 
 export async function createCart(data: SupermarketNameData) {
 	const session = await auth();

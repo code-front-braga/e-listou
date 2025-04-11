@@ -1,8 +1,8 @@
 'use server';
 
 import { CartStatus, Prisma } from '@prisma/client';
-import { auth } from '../../../../auth';
 import { db } from '@/lib/db/prisma';
+import { auth } from '../../../../auth';
 
 export async function deleteCompletedCart(
 	cart: Prisma.CartGetPayload<{ select: { id: true } }>,

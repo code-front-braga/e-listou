@@ -1,9 +1,9 @@
 'use server';
 
 import { db } from '@/lib/db/prisma';
-import { auth } from '../../../../auth';
 import { CartStatus } from '@prisma/client';
 import { calculateTotal } from '@/utils/calculate-total';
+import { auth } from '../../../../auth';
 
 export async function completeCart() {
 	const session = await auth();

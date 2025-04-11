@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
-import { auth } from '../../../auth';
 import { DashboardHeader } from './components/dashboard-header';
 import DashboarNavbar from './components/dashboard-navbar';
 import { Metadata } from 'next';
+import { auth } from '../../../auth';
 
 export const metadata: Metadata = {
 	title: 'e-listou! - Dashboard',

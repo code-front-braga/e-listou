@@ -1,3 +1,5 @@
+'use client';
+
 import { ConfirmDialog } from '@/components/confirm-dialog';
 import { formatToCurrencyBRL } from '@/utils/format-to-currency-brl';
 import { formatToDateBRL } from '@/utils/format-to-date-brl';

@@ -14,7 +14,8 @@ import { useState } from 'react';
 import { ConfirmDialog } from '@/components/confirm-dialog';
 import { deleteUserAccount } from '../actions/delete-account';
 import { showPromiseToast } from '@/components/promise-toast';
-import { signOut } from 'next-auth/react';
+import { logout } from '../actions/logout';
+// import { signOut } from 'next-auth/react';
 
 interface DashboardHeaderProps {
 	user: Prisma.UserGetPayload<{
@@ -38,7 +39,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
 		const res = await resPromise;
 
 		if (res.success) {
-			await signOut({ redirectTo: '/auth/login' });
+			await logout();
 		} else if (res.error) {
 			console.log(res.error);
 		}

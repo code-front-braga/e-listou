@@ -1,9 +1,9 @@
 'use server';
 
-import { auth } from '../../../../auth';
 import { db } from '@/lib/db/prisma';
 import { multiplyNumbers } from '@/utils/mutiply-numbers';
 import { Prisma } from '@prisma/client';
+import { auth } from '../../../../auth';
 
 export async function editItem(
 	item: Prisma.ItemGetPayload<{

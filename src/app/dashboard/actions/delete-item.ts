@@ -1,8 +1,9 @@
 'use server';
 
 import { Prisma } from '@prisma/client';
-import { auth } from '../../../../auth';
+
 import { db } from '@/lib/db/prisma';
+import { auth } from '../../../../auth';
 
 export async function deleteItem(
 	item: Prisma.ItemGetPayload<{ select: { id: true } }>,

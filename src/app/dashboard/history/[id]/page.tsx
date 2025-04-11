@@ -1,8 +1,8 @@
 import { getDetails } from '../../services/get-details';
 import { DashboardSection } from '../../components/dashboard-section';
 import { Details } from './components/details';
-import { auth } from '../../../../../auth';
 import { db } from '@/lib/db/prisma';
+import { auth } from '../../../../../auth';
 
 interface HistoryDetailsProps {
 	params: Promise<{ id: string }>;

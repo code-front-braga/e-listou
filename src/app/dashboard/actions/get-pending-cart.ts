@@ -1,8 +1,8 @@
 'use server';
 
 import { db } from '@/lib/db/prisma';
-import { auth } from '../../../../auth';
 import { CartStatus } from '@prisma/client';
+import { auth } from '../../../../auth';
 
 export async function getPendingCart() {
 	const session = await auth();

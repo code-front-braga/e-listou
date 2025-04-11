@@ -1,10 +1,10 @@
 'use server';
 
 import { AddNewItemData } from '@/lib/zod/cart';
-import { auth } from '../../../../auth';
 import { db } from '@/lib/db/prisma';
 import { CartStatus } from '@prisma/client';
 import { multiplyNumbers } from '@/utils/mutiply-numbers';
+import { auth } from '../../../../auth';
 
 export async function addItem(data: AddNewItemData) {
 	const session = await auth();

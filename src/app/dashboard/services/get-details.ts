@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
-import { auth } from '../../../../auth';
 import { db } from '@/lib/db/prisma';
+import { auth } from '../../../../auth';
 
 export async function getDetails(
 	cart: Prisma.CartGetPayload<{ select: { id: true } }>,

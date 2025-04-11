@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
-import { auth } from '../../../auth';
 import { WelcomeAnimation } from './components/welcome-animation';
 import { Metadata } from 'next';
+import { auth } from '../../../auth';
 
 export const metadata: Metadata = {
 	title: 'Seja bem-vindo(a)',
