@@ -17,7 +17,14 @@ export async function completeCart() {
 		});
 
 		if (existingCart) {
-			const total = calculateTotal(existingCart.items);
+			const updatedCart = await db.cart.findUnique({
+				where: { id: existingCart.id },
+				include: { items: true },
+			});
+			if (!updatedCart?.items)
+				return { error: 'Erro ao buscar os itens atualizados no carrinho.' };
+
+			const total = calculateTotal(updatedCart.items);
 
 			await db.cart.update({
 				where: { id: existingCart.id },

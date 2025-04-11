@@ -2,6 +2,7 @@
 
 import { auth } from '../../../../auth';
 import { db } from '@/lib/db/prisma';
+import { multiplyNumbers } from '@/utils/mutiply-numbers';
 import { Prisma } from '@prisma/client';
 
 export async function editItem(
@@ -20,9 +21,15 @@ export async function editItem(
 		});
 
 		if (existingItem) {
+			const totalPrice = multiplyNumbers(item.price, item.quantity);
+
 			await db.item.update({
 				where: { id: item.id },
-				data: { price: item.price, quantity: item.quantity },
+				data: {
+					price: item.price,
+					quantity: item.quantity,
+					totalPrice: totalPrice,
+				},
 			});
 
 			return { success: 'Item editado com sucesso!' };

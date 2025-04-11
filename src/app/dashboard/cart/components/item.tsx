@@ -41,7 +41,7 @@ export function Items({ item }: ItemsProps) {
 	async function handleEditItem(data: EditItemData) {
 		setEditItemLoading(true);
 
-		const resPromise = editItem({ ...item });
+		const resPromise = editItem({ id: item.id, ...data });
 		showPromiseToast({
 			loading: 'Editando...',
 			promise: resPromise,
