@@ -25,7 +25,7 @@ export function SubmitStep({ loading }: SubmitStepProps) {
 			className="flex h-58 w-full flex-col justify-around gap-2"
 		>
 			<div className="flex justify-between gap-2">
-				<h3 className="text-christalle text-base font-semibold">
+				<h3 className="text-christalle text-sm font-semibold">
 					Quase lá... Para finalizar, basta clicar no botão abaixo!
 				</h3>
 

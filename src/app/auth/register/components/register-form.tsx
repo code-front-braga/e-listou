@@ -1,24 +1,26 @@
 'use client';
 
-import { Form } from '@/components/ui/form';
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormMessage,
+} from '@/components/ui/form';
 import { RegisterData, registerSchema } from '@/lib/zod/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { RegisterContext, RegisterSteps } from '../context/register-context';
-import { InputStepModel } from './input-step-model';
-import { AnimatePresence } from 'motion/react';
+import { RegisterContext } from '../context/register-context';
+import { AnimatePresence, motion } from 'motion/react';
 import { SubmitStep } from './submit-step';
 import { createUser } from '../../actions/create-user';
 import { showPromiseToast } from '@/components/promise-toast';
 import { useRouter } from 'next/navigation';
-
-const fieldMap: Partial<Record<RegisterSteps, keyof RegisterData>> = {
-	'name-step': 'name',
-	'email-step': 'email',
-	'password-step': 'password',
-	'confirm-password-step': 'confirmPassword',
-};
+import { Input } from '@/components/ui/input';
+import { MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md';
+import { BackButton } from './back-button';
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 
 export function RegisterForm() {
 	const form = useForm<RegisterData>({
@@ -34,40 +36,22 @@ export function RegisterForm() {
 	const router = useRouter();
 
 	useEffect(() => {
-		if (fieldMap[step]) {
-			form.setFocus(fieldMap[step]);
+		if (step === 'name-email-step') {
+			form.setFocus('name');
 		}
-	}, [form, step]);
+	}, [step]);
 
-	const handleNextStep = useCallback(
-		async (fieldName: keyof RegisterData, nextStep: RegisterSteps) => {
-			const isValid = await form.trigger(fieldName);
-			if (isValid) {
-				setStep(nextStep);
-			}
-		},
-		[form, setStep],
-	);
+	async function handleConfirmNameAndEmail() {
+		const isValid = await form.trigger(['name', 'email']);
 
-	const handlePasswordConfirmation = useCallback(
-		(e: React.FormEvent) => {
-			e.preventDefault();
-			const isValid = form.trigger(['password', 'confirmPassword']);
-			const { password, confirmPassword } = form.getValues();
+		if (isValid) nextStep();
+	}
 
-			if (!isValid) return;
+	async function handleConfirmPasswords() {
+		const isValid = await form.trigger(['password', 'confirmPassword']);
 
-			if (password !== confirmPassword) {
-				form.setError('confirmPassword', {
-					message: 'As senhas não coincidem',
-				});
-				return;
-			}
-
-			nextStep();
-		},
-		[form, nextStep],
-	);
+		if (isValid) nextStep();
+	}
 
 	async function handleRegisterUser(data: RegisterData) {
 		setSubmitLoading(true);
@@ -84,7 +68,7 @@ export function RegisterForm() {
 				router.push('/auth/login');
 			} else if (res.error) {
 				setErrorMessage(res.error);
-				setStep('email-step');
+				setStep('name-email-step');
 			}
 		} catch (error) {
 			console.error('Erro ao cadastrar o usuário:', error);
@@ -99,67 +83,161 @@ export function RegisterForm() {
 				onSubmit={form.handleSubmit(handleRegisterUser)}
 				className="relative mx-auto mt-2.5 flex w-full flex-col items-center gap-3.5 overflow-hidden"
 			>
-				{errorMessage && (
-					<p className="text-cabaret">{errorMessage}</p>
-				)}
+				{errorMessage && <p className="text-cabaret">{errorMessage}</p>}
 				<AnimatePresence mode="wait">
-					{step === 'name-step' && (
-						<InputStepModel
-							form={form}
-							type="text"
-							fieldName="name"
-							label="Nome"
-							ariaLabel="Nome de usuário"
-							placeholder="Digite seu nome/apelido..."
-							autoComplete="name"
-							title="Para começar, digite seu nome ou um apelido..."
-							onNext={() => handleNextStep('name', 'email-step')}
-						/>
+					{step === 'name-email-step' && (
+						<motion.div
+							key="name-email-step"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.3 }}
+							className="flex h-58 w-full flex-col justify-around gap-6"
+						>
+							<h3 className="text-christalle text-sm font-semibold">
+								Para começar, digite seu nome e melhor email...
+							</h3>
+							<FormField
+								control={form.control}
+								name="name"
+								render={({ field }) => (
+									<FormItem className="relative w-full">
+										<FormControl>
+											<Input
+												{...field}
+												type="text"
+												placeholder="Digite seu nome..."
+												aria-label="Seu nome"
+												className="bg-christalle/65 rounded p-2 indent-2 text-sm text-white placeholder:text-white"
+											/>
+										</FormControl>
+										<FormMessage className="absolute -bottom-4 text-xs font-semibold" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="email"
+								render={({ field }) => (
+									<FormItem className="relative w-full">
+										<FormControl>
+											<Input
+												{...field}
+												type="text"
+												placeholder="Digite seu email..."
+												aria-label="Seu email"
+												className="bg-christalle/65 rounded p-2 indent-2 text-sm text-white placeholder:text-white"
+											/>
+										</FormControl>
+										<FormMessage className="absolute -bottom-4 text-xs font-semibold" />
+									</FormItem>
+								)}
+							/>
+
+							<button
+								type="button"
+								onClick={handleConfirmNameAndEmail}
+								className="bg-cabaret mt-3 flex w-full items-center justify-between rounded px-4 py-2 text-sm text-white"
+							>
+								<span>Avançar</span>
+								<motion.div
+									animate={{ x: 8 }}
+									transition={{
+										duration: 0.6,
+										repeat: Infinity,
+										repeatType: 'reverse',
+									}}
+								>
+									<MdOutlineKeyboardDoubleArrowRight size={24} />
+								</motion.div>
+							</button>
+						</motion.div>
 					)}
 
-					{step === 'email-step' && (
-						<InputStepModel
-							form={form}
-							type="email"
-							fieldName="email"
-							label="Email"
-							placeholder="Digite seu email..."
-							autoComplete="email"
-							title="Agora, digite seu melhor email..."
-							onNext={() => handleNextStep('email', 'password-step')}
-						/>
-					)}
-
-					{step === 'password-step' && (
-						<InputStepModel
-							form={form}
-							type="password"
-							fieldName="password"
-							label="Senha"
-							placeholder="Digite sua senha..."
-							autoComplete="new-password"
-							title="Crie uma senha..."
-							showPassword={showPassword}
-							setShowPassword={() => setShowPassword(!showPassword)}
-							onNext={() => handleNextStep('password', 'confirm-password-step')}
-						/>
-					)}
-
-					{step === 'confirm-password-step' && (
-						<InputStepModel
-							form={form}
-							type="password"
-							fieldName="confirmPassword"
-							label="Confirme a senha"
-							title="Por favor, confirme sua senha..."
-							placeholder="Confirme sua senha..."
-							autoComplete="new-password"
-							showPassword={showConfirmPassword}
-							setShowPassword={() =>
-								setShowConfirmPassword(!showConfirmPassword)
-							}
-							onNext={e => handlePasswordConfirmation(e)}
-						/>
+					{step === 'password-confirm-password-step' && (
+						<motion.div
+							key="password-confirm-password-step"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.3 }}
+							className="flex h-58 w-full flex-col justify-around gap-6"
+						>
+							<div className="flex items-center justify-between gap-2">
+								<h3 className="text-christalle text-sm font-semibold">
+									Agora, crie uma senha segura e confirme-a...
+								</h3>
+								<BackButton />
+							</div>
+							<FormField
+								control={form.control}
+								name="password"
+								render={({ field }) => (
+									<FormItem className="relative w-full">
+										<FormControl>
+											<Input
+												{...field}
+												type={showPassword ? 'text' : 'password'}
+												placeholder="Crie uma senha..."
+												aria-label="Sua senha"
+												autoComplete="new-password"
+												className="bg-christalle/65 rounded p-2 indent-2 text-sm text-white placeholder:text-white"
+											/>
+										</FormControl>
+										<button
+											type="button"
+											onClick={() => setShowPassword(!showPassword)}
+											className="absolute top-2.5 right-3.5 text-white"
+										>
+											{showPassword ? <IoIosEye /> : <IoIosEyeOff />}
+										</button>
+										<FormMessage className="absolute -bottom-4 text-xs font-semibold" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="confirmPassword"
+								render={({ field }) => (
+									<FormItem className="relative w-full">
+										<FormControl>
+											<Input
+												type={showConfirmPassword ? 'text' : 'password'}
+												placeholder="Confirme a senha..."
+												aria-label="Confirme a senha"
+												{...field}
+												className="bg-christalle/65 rounded p-2 indent-2 text-sm text-white placeholder:text-white"
+											/>
+										</FormControl>
+										<button
+											type="button"
+											onClick={() =>
+												setShowConfirmPassword(!showConfirmPassword)
+											}
+											className="absolute top-2.5 right-3.5 text-white"
+										>
+											{showConfirmPassword ? <IoIosEye /> : <IoIosEyeOff />}
+										</button>
+										<FormMessage className="absolute -bottom-4 text-xs font-semibold" />
+									</FormItem>
+								)}
+							/>
+							<button
+								type="button"
+								onClick={handleConfirmPasswords}
+								className="bg-cabaret mt-3 flex w-full items-center justify-between rounded px-4 py-2 text-sm text-white"
+							>
+								<span>Avançar</span>
+								<motion.div
+									animate={{ x: 8 }}
+									transition={{
+										duration: 0.6,
+										repeat: Infinity,
+										repeatType: 'reverse',
+									}}
+								>
+									<MdOutlineKeyboardDoubleArrowRight size={24} />
+								</motion.div>
+							</button>
+						</motion.div>
 					)}
 
 					{step === 'submit-step' && <SubmitStep loading={submitLoading} />}

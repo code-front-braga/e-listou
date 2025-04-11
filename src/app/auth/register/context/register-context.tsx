@@ -3,10 +3,8 @@
 import { createContext, useState } from 'react';
 
 export type RegisterSteps =
-	| 'name-step'
-	| 'email-step'
-	| 'password-step'
-	| 'confirm-password-step'
+	| 'name-email-step'
+	| 'password-confirm-password-step'
 	| 'submit-step';
 
 export interface IRegisterContext {
@@ -18,7 +16,7 @@ export interface IRegisterContext {
 }
 
 export const RegisterContext = createContext<IRegisterContext>({
-	step: 'name-step',
+	step: 'name-email-step',
 
 	setStep: () => {},
 	nextStep: () => {},
@@ -30,21 +28,15 @@ export function RegisterProvider({
 }: {
 	children: Readonly<React.ReactNode>;
 }) {
-	const [step, setStep] = useState<RegisterSteps>('name-step');
+	const [step, setStep] = useState<RegisterSteps>('name-email-step');
 
 	function backStep() {
 		switch (step) {
-			case 'email-step':
-				setStep('name-step');
-				break;
-			case 'password-step':
-				setStep('email-step');
-				break;
-			case 'confirm-password-step':
-				setStep('password-step');
+			case 'password-confirm-password-step':
+				setStep('name-email-step');
 				break;
 			case 'submit-step':
-				setStep('confirm-password-step');
+				setStep('password-confirm-password-step');
 				break;
 			default:
 				break;
@@ -52,20 +44,11 @@ export function RegisterProvider({
 	}
 	function nextStep() {
 		switch (step) {
-			case 'name-step':
-				setStep('email-step');
+			case 'name-email-step':
+				setStep('password-confirm-password-step');
 				break;
-			case 'email-step':
-				setStep('password-step');
-				break;
-			case 'password-step':
-				setStep('confirm-password-step');
-				break;
-			case 'confirm-password-step':
+			case 'password-confirm-password-step':
 				setStep('submit-step');
-				break;
-			case 'submit-step':
-				setStep('confirm-password-step');
 				break;
 			default:
 				return step;

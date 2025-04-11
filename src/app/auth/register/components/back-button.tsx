@@ -10,7 +10,7 @@ export function BackButton() {
 
 	return (
 		<>
-			{step !== 'name-step' && (
+			{step !== 'name-email-step' && (
 				<button onClick={backStep} className="flex items-center gap-1.5">
 					<motion.div
 						animate={{ x: -4 }}

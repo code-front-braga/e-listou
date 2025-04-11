@@ -9,7 +9,7 @@ type CredentialsLoginData = z.infer<typeof credentialsLoginSchema>;
 
 const registerSchema = z
 	.object({
-		name: z.string().min(1, { message: 'Campo obrigatório' }).trim(),
+		name: z.string().min(1, { message: 'O nome é obrigatório' }).trim(),
 		email: z.string().email({ message: 'Formato de email inválido' }).trim(),
 		password: z
 			.string()
