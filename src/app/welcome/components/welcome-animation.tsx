@@ -49,7 +49,7 @@ export function WelcomeAnimation({ user }: AnimateScreenProps) {
 			variants={gradientVariants}
 			animate="animate"
 			style={{
-				background: 'linear-gradient(90deg, #6a11cb, #2575fc)',
+				background: 'linear-gradient(90deg, #6a11cb, #3e2259)',
 				backgroundSize: '200% 200%',
 			}}
 			className="flex h-screen items-center justify-center"
